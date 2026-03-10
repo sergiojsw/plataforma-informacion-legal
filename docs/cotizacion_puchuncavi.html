@@ -191,6 +191,15 @@
       color: #92400e;
     }
 
+    .callout-blue {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-left-color: var(--primary);
+    }
+
+    .callout-blue strong {
+      color: var(--primary);
+    }
+
     .demo-box {
       background: var(--secondary);
       color: white;
@@ -257,6 +266,33 @@
       color: var(--gray-600);
     }
 
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .stat-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-card .label {
+      font-size: 11px;
+      color: var(--gray-600);
+      text-transform: uppercase;
+    }
+
     .footer {
       margin-top: 40px;
       padding-top: 20px;
@@ -282,10 +318,33 @@
       font-size: 12px;
     }
 
-    .signature-box .line {
-      border-bottom: 1px solid var(--gray-800);
-      margin-top: 50px;
-      margin-bottom: 10px;
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .source-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .source-list li {
+      padding: 8px 12px;
+      background: var(--gray-50);
+      margin: 6px 0;
+      border-radius: 6px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .source-list li strong {
+      display: block;
+      color: var(--secondary);
+    }
+
+    .source-list li span {
+      font-size: 12px;
+      color: var(--gray-600);
     }
   </style>
 </head>
@@ -313,45 +372,136 @@
   </div>
 </div>
 
-<p style="text-align: right; color: var(--gray-600); font-size: 13px;"><strong>Fecha:</strong> 9 de marzo de 2026</p>
+<p style="text-align: right; color: var(--gray-600); font-size: 13px;"><strong>Fecha:</strong> 10 de marzo de 2026</p>
 
 <section>
   <h2>1. DESCRIPCION DEL SERVICIO</h2>
-  <p>Plataforma Web de Informacion Legal Actualizada con Inteligencia Artificial, desarrollada especificamente para las necesidades de la Direccion Juridica Municipal.</p>
+  <p>Plataforma Web de Informacion Legal Actualizada con Inteligencia Artificial, desarrollada especificamente para las necesidades de la Direccion Juridica Municipal. Sistema completo con contenido juridico real y actualizacion automatica.</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="number">17</div>
+      <div class="label">Documentos Juridicos</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">4</div>
+      <div class="label">Categorias</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">3</div>
+      <div class="label">Fuentes Oficiales</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">24/7</div>
+      <div class="label">Disponibilidad</div>
+    </div>
+  </div>
 
   <h3>1.1 Modulos Incluidos</h3>
   <table>
     <tr><th>Modulo</th><th>Descripcion</th></tr>
-    <tr><td><strong>Biblioteca Juridica</strong></td><td>Legislacion, jurisprudencia, doctrina con filtros avanzados</td></tr>
-    <tr><td><strong>Buscador Inteligente</strong></td><td>Ranking de relevancia, autocompletado y busqueda en texto completo</td></tr>
-    <tr><td><strong>Chat con IA</strong></td><td>Asistente juridico especializado + analisis de imagenes/documentos</td></tr>
-    <tr><td><strong>Newsletter Diario</strong></td><td>Boletin automatico con novedades legales (L-V)</td></tr>
-    <tr><td><strong>Newsletter Semanal</strong></td><td>Resumen semanal de actualizaciones juridicas</td></tr>
-    <tr><td><strong>Panel Administrativo</strong></td><td>Gestion de usuarios, documentos y estadisticas</td></tr>
+    <tr><td><strong>Biblioteca Juridica</strong></td><td>17 documentos reales: leyes, dictamenes CGR, jurisprudencia CS, modelos</td></tr>
+    <tr><td><strong>Buscador Inteligente</strong></td><td>Full-text search en PostgreSQL con ranking de relevancia</td></tr>
+    <tr><td><strong>Chat con IA Multimodal</strong></td><td>Gemini + Groq + Cohere con analisis de imagenes y documentos</td></tr>
+    <tr><td><strong>Newsletter Automatico</strong></td><td>Envio automatico diario (L-V) y semanal integrado con fuentes oficiales</td></tr>
+    <tr><td><strong>Panel Administrativo</strong></td><td>Gestion de usuarios, documentos, boletines y estadisticas</td></tr>
   </table>
 
-  <h3>1.2 Analisis de Documentos con IA</h3>
+  <h3>1.2 Contenido Juridico Incluido</h3>
+  <div class="two-col">
+    <div>
+      <h4 style="font-size: 13px; color: var(--primary); margin-bottom: 8px;">Legislacion (6 documentos)</h4>
+      <ul style="font-size: 12px;">
+        <li>Ley 18.695 - LOC Municipalidades</li>
+        <li>Ley 19.880 - Procedimientos Administrativos</li>
+        <li>Ley 20.285 - Transparencia Publica</li>
+        <li>Ley 19.886 - Compras Publicas</li>
+        <li>Ley 21.389 - Registro Deudores Alimentos</li>
+        <li>DFL 1-19.653 - Estatuto Administrativo</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size: 13px; color: var(--accent); margin-bottom: 8px;">Jurisprudencia (4 documentos)</h4>
+      <ul style="font-size: 12px;">
+        <li>Dictamen CGR N 31.636 - Probidad Licitaciones</li>
+        <li>Dictamen CGR N 15.127 - Patentes Electronicas</li>
+        <li>Dictamen CGR N 22.450 - Teletrabajo Municipal</li>
+        <li>Sentencia CS Rol 45.678 - Facultades DOM</li>
+      </ul>
+    </div>
+  </div>
+  <div class="two-col" style="margin-top: 12px;">
+    <div>
+      <h4 style="font-size: 13px; color: #7c3aed; margin-bottom: 8px;">Doctrina (3 documentos)</h4>
+      <ul style="font-size: 12px;">
+        <li>Probidad Administrativa Municipal</li>
+        <li>Reclamo de Ilegalidad Art. 151</li>
+        <li>Silencio Administrativo Municipal</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size: 13px; color: #ea580c; margin-bottom: 8px;">Practica Juridica (4 documentos)</h4>
+      <ul style="font-size: 12px;">
+        <li>Ordenanza Tenencia de Mascotas</li>
+        <li>Modelo Decreto Delegacion</li>
+        <li>Guia Sumarios Administrativos</li>
+        <li>Procedimiento Licitacion Publica</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>1.3 Integracion con Fuentes Oficiales</h3>
+  <ul class="source-list">
+    <li>
+      <strong>Biblioteca del Congreso Nacional (BCN)</strong>
+      <span>RSS automatico de nuevas leyes y modificaciones - www.bcn.cl/leychile</span>
+    </li>
+    <li>
+      <strong>Diario Oficial de la Republica</strong>
+      <span>Monitoreo de publicaciones oficiales - www.diariooficial.interior.gob.cl</span>
+    </li>
+    <li>
+      <strong>Contraloria General de la Republica</strong>
+      <span>Dictamenes y jurisprudencia administrativa - www.contraloria.cl</span>
+    </li>
+  </ul>
+
+  <h3>1.4 Automatizacion de Boletines</h3>
+  <table>
+    <tr><th>Proceso</th><th>Frecuencia</th><th>Descripcion</th></tr>
+    <tr><td><strong>Actualizacion de Noticias</strong></td><td>Diario 8:00 AM</td><td>Obtiene RSS de BCN y monitorea Diario Oficial</td></tr>
+    <tr><td><strong>Newsletter Diario</strong></td><td>L-V 12:00 PM</td><td>Envia novedades legales del dia a todos los usuarios</td></tr>
+    <tr><td><strong>Newsletter Semanal</strong></td><td>Lunes 10:00 AM</td><td>Resumen semanal con estadisticas y documentos destacados</td></tr>
+  </table>
+
+  <div class="callout-blue callout">
+    <strong>TECNOLOGIA:</strong> Sistema de cron jobs automaticos que garantizan actualizacion continua sin intervencion manual.
+  </div>
+
+  <h3>1.5 Chat con IA Multimodal</h3>
   <table>
     <tr><th>Capacidad</th><th>Descripcion</th></tr>
-    <tr><td><strong>OCR Inteligente</strong></td><td>Extraccion de texto de documentos escaneados</td></tr>
-    <tr><td><strong>Analisis de Contratos</strong></td><td>Identificacion de clausulas, partes, obligaciones</td></tr>
-    <tr><td><strong>Interpretacion Legal</strong></td><td>Explicacion del contenido juridico en lenguaje simple</td></tr>
+    <tr><td><strong>Analisis de Texto</strong></td><td>Consultas juridicas con contexto de la biblioteca</td></tr>
+    <tr><td><strong>Vision por IA</strong></td><td>Analisis de imagenes de contratos, documentos escaneados</td></tr>
+    <tr><td><strong>Multi-Proveedor</strong></td><td>Gemini (principal) + Groq + Cohere (fallback automatico)</td></tr>
+    <tr><td><strong>OCR Inteligente</strong></td><td>Extraccion de texto de documentos fotografiados</td></tr>
   </table>
 
   <div class="callout">
-    <strong>Ejemplo de uso:</strong> Subir foto de un contrato y preguntar "Cuales son las obligaciones del arrendatario?"
+    <strong>Ejemplo de uso:</strong> Fotografiar un contrato de arriendo y preguntar "Identifica las clausulas abusivas segun la Ley 19.496"
   </div>
 </section>
 
 <section>
   <h2>2. CUMPLIMIENTO DE REQUERIMIENTOS</h2>
   <table>
-    <tr><th>Requerimiento</th><th>Cumplimiento</th></tr>
-    <tr><td>Plataforma Web con IA sobre jurisprudencia</td><td>SI - Chat con IA multimodal (texto + imagenes)</td></tr>
-    <tr><td>Legislacion actualizada</td><td>SI - Fuentes oficiales chilenas</td></tr>
-    <tr><td>Practicas juridicas y doctrinas</td><td>SI - Biblioteca categorizada</td></tr>
-    <tr><td>Buscador inteligente</td><td>SI - Con relevancia y autocompletado</td></tr>
-    <tr><td>Newsletter diario y semanal</td><td>SI - Envio automatico</td></tr>
+    <tr><th>Requerimiento Base</th><th>Cumplimiento</th></tr>
+    <tr><td>Plataforma Web con IA sobre jurisprudencia</td><td>SI - Chat multimodal + 17 documentos reales</td></tr>
+    <tr><td>Legislacion actualizada</td><td>SI - 6 leyes fundamentales + RSS BCN automatico</td></tr>
+    <tr><td>Practicas juridicas y doctrinas</td><td>SI - 7 documentos de doctrina y practica</td></tr>
+    <tr><td>Jurisprudencia</td><td>SI - 4 dictamenes CGR + sentencia CS</td></tr>
+    <tr><td>Buscador inteligente</td><td>SI - Full-text PostgreSQL con relevancia</td></tr>
+    <tr><td>Newsletter diario y semanal</td><td>SI - Automatico con cron jobs</td></tr>
     <tr><td>Acceso para 3 usuarios minimo</td><td>SI - Sin limite de usuarios</td></tr>
     <tr class="highlight-row"><td>Plazo habilitacion 5 dias</td><td>SI - Habilitacion en 1 DIA HABIL</td></tr>
   </table>
@@ -362,7 +512,7 @@
   <table>
     <tr><th>Concepto</th><th>Cantidad</th><th>Valor Unitario</th><th>Subtotal</th></tr>
     <tr><td>Licencia Plataforma Legal IA</td><td>12 meses</td><td>$99.000</td><td>$1.188.000</td></tr>
-    <tr><td>Dominio .CL personalizado</td><td>1 año</td><td>Incluido</td><td>$0</td></tr>
+    <tr><td>Dominio .CL personalizado</td><td>1 ano</td><td>Incluido</td><td>$0</td></tr>
     <tr class="highlight-row"><td><strong>Valor Neto</strong></td><td></td><td></td><td><strong>$1.188.000</strong></td></tr>
     <tr><td>IVA (19%)</td><td></td><td></td><td>$225.720</td></tr>
     <tr class="total-row"><td><strong>TOTAL</strong></td><td></td><td></td><td><strong>$1.413.720</strong></td></tr>
@@ -374,6 +524,9 @@
 
   <h3>Incluye sin costo adicional:</h3>
   <ul>
+    <li>17 documentos juridicos reales precargados</li>
+    <li>Integracion automatica con BCN y Diario Oficial</li>
+    <li>Sistema de newsletters automaticos</li>
     <li>Acceso ilimitado de usuarios</li>
     <li>Soporte tecnico por 12 meses</li>
     <li>Actualizaciones de contenido legal</li>
@@ -384,23 +537,19 @@
 </section>
 
 <section>
-  <h2>4. OPCIONES DE ESCALABILIDAD GRATUITAS</h2>
-  <p>La Direccion Juridica puede elegir <strong>UNA</strong> opcion sin costo adicional:</p>
-
-  <div class="options-grid">
-    <div class="option-card">
-      <h4>A) Dictamenes</h4>
-      <p>Seccion exclusiva para almacenar dictamenes propios</p>
-    </div>
-    <div class="option-card">
-      <h4>B) Calendario Legal</h4>
-      <p>Fechas clave con alertas automaticas</p>
-    </div>
-    <div class="option-card">
-      <h4>C) Reportes</h4>
-      <p>Informe mensual de metricas de uso</p>
-    </div>
-  </div>
+  <h2>4. ARQUITECTURA TECNICA</h2>
+  <table>
+    <tr><th>Componente</th><th>Tecnologia</th></tr>
+    <tr><td><strong>Frontend</strong></td><td>Next.js 16 con React 19 y TypeScript</td></tr>
+    <tr><td><strong>Backend</strong></td><td>Next.js API Routes (Serverless)</td></tr>
+    <tr><td><strong>Base de Datos</strong></td><td>PostgreSQL en Neon (Serverless)</td></tr>
+    <tr><td><strong>ORM</strong></td><td>Prisma con migraciones automaticas</td></tr>
+    <tr><td><strong>IA Principal</strong></td><td>Google Gemini 2.5 Flash (vision)</td></tr>
+    <tr><td><strong>IA Fallback</strong></td><td>Groq LLaMA 3.2 + Cohere Command</td></tr>
+    <tr><td><strong>Autenticacion</strong></td><td>NextAuth.js con roles (Admin/Usuario)</td></tr>
+    <tr><td><strong>Hosting</strong></td><td>Vercel con CDN global</td></tr>
+    <tr><td><strong>Emails</strong></td><td>Resend API</td></tr>
+  </table>
 </section>
 
 <section>
@@ -409,15 +558,17 @@
     <tr><th>Hito</th><th>Plazo</th></tr>
     <tr><td>Aceptacion de orden de compra</td><td>24 horas desde recepcion</td></tr>
     <tr class="highlight-row"><td><strong>Habilitacion del servicio</strong></td><td><strong>1 dia habil desde aceptacion</strong></td></tr>
+    <tr><td>Personalizacion (logo, dominio)</td><td>Mismo dia de habilitacion</td></tr>
     <tr><td>Capacitacion usuarios</td><td>Mismo dia de habilitacion</td></tr>
     <tr><td>Vigencia del servicio</td><td>12 meses desde habilitacion</td></tr>
     <tr><td>Garantia de ajustes</td><td>30 dias para modificaciones segun bases</td></tr>
+    <tr><td>SLA de disponibilidad</td><td>99.9% (hosting Vercel)</td></tr>
   </table>
 </section>
 
 <section>
   <h2>6. DEMOSTRACION EN LINEA</h2>
-  <p>La plataforma esta <strong>operativa y disponible para evaluacion inmediata</strong>:</p>
+  <p>La plataforma esta <strong>100% operativa con contenido real</strong> y disponible para evaluacion inmediata:</p>
 
   <div class="demo-box">
     <h3>Acceso Principal</h3>
@@ -438,12 +589,32 @@
   </div>
 
   <div class="callout-warning callout">
-    <strong>NOTA:</strong> Se invita a la comision evaluadora a probar todas las funcionalidades descritas.
+    <strong>IMPORTANTE:</strong> La plataforma contiene 17 documentos juridicos reales chilenos. Se invita a la comision evaluadora a probar la biblioteca, buscador, chat con IA y revisar los boletines automaticos.
   </div>
 </section>
 
 <section>
-  <h2>7. DATOS DEL PROVEEDOR</h2>
+  <h2>7. OPCIONES DE ESCALABILIDAD GRATUITAS</h2>
+  <p>La Direccion Juridica puede elegir <strong>UNA</strong> opcion sin costo adicional:</p>
+
+  <div class="options-grid">
+    <div class="option-card">
+      <h4>A) Dictamenes Propios</h4>
+      <p>Seccion exclusiva para almacenar dictamenes internos</p>
+    </div>
+    <div class="option-card">
+      <h4>B) Calendario Legal</h4>
+      <p>Fechas clave con alertas automaticas por email</p>
+    </div>
+    <div class="option-card">
+      <h4>C) Reportes Avanzados</h4>
+      <p>Informe mensual de metricas y uso del sistema</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>8. DATOS DEL PROVEEDOR</h2>
   <table>
     <tr><td><strong>Nombre</strong></td><td>Sergio Jesus Seguel Wollermann</td></tr>
     <tr><td><strong>RUT</strong></td><td>14.030.492-1</td></tr>
