@@ -1041,7 +1041,7 @@ Los funcionarios municipales que integren comisiones evaluadoras deben absteners
 La participacion de un funcionario impedido constituye infraccion grave al principio de probidad y puede acarrear nulidad del proceso.
 
 Corresponde al alcalde velar por el cumplimiento de estas normas.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 15.127/2023 - Patentes Comerciales y Giros Electronicos',
@@ -1057,7 +1057,7 @@ Las empresas que operan exclusivamente por plataformas electronicas quedan sujet
 No procede que una municipalidad cobre patente a una empresa por el solo hecho de que venda a habitantes de su comuna si no tiene establecimiento en el territorio comunal.
 
 En caso de mantener bodegas o centros de distribucion, corresponde pago de patente a dicho municipio.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 22.450/2024 - Teletrabajo en Funcionarios Municipales',
@@ -1076,7 +1076,7 @@ c) Se formalice mediante resolucion alcaldicia
 Los funcionarios mantienen todos sus derechos y obligaciones.
 
 El derecho a desconexion digital aplica a funcionarios municipales.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 8.234/2023 - Honorarios y Contratacion a Honorarios',
@@ -1098,7 +1098,7 @@ b) Desempenar funciones permanentes
 c) Prolongar indefinidamente vinculaciones
 
 La simulacion de relaciones laborales bajo honorarios constituye irregularidad administrativa.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 45.892/2023 - Bienes Municipales y Comodato',
@@ -1119,7 +1119,7 @@ d) Plazo determinado
 e) Clausula de restitucion
 
 Las sedes de juntas de vecinos gozan de preferencia en asignacion de espacios.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 12.567/2024 - Subvenciones Municipales',
@@ -1144,7 +1144,7 @@ b) Certificacion de gastos
 c) Informe de actividades
 
 El incumplimiento impide acceder a nuevas subvenciones.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 33.456/2024 - Concejales y Conflicto de Interes',
@@ -1164,7 +1164,7 @@ d) Otorguen contratos a personas relacionadas
 El concejal debe hacer presente su inhabilidad antes de la votacion.
 
 La participacion de concejal inhabilitado puede acarrear nulidad del acuerdo.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 28.901/2023 - Ordenanzas Municipales y Legalidad',
@@ -1192,7 +1192,7 @@ d) Afectar derechos constitucionales
 e) Contradecir normas legales
 
 Las multas deben ajustarse a los rangos legales (1 a 5 UTM).`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 19.234/2024 - Permisos Municipales y Silencio Administrativo',
@@ -1218,7 +1218,7 @@ Para invocar silencio positivo:
 a) Transcurrir el plazo legal (20 dias habiles si no hay plazo especial)
 b) Denunciar el incumplimiento
 c) Obtener certificacion del jefe de servicio`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 41.234/2023 - Permisos de Circulacion y Deudores',
@@ -1236,7 +1236,7 @@ b) Emitir permisos de circulacion
 Si el solicitante esta inscrito en el Registro, no puede procederse a la emision hasta acreditar solucion de la deuda.
 
 El funcionario que emita documentos sin verificacion incurre en responsabilidad administrativa.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 55.678/2022 - Asignaciones Funcionarias Municipales',
@@ -1262,7 +1262,7 @@ Asignaciones aplicables:
 - Bono de escolaridad
 
 La jurisprudencia rechaza pagos a titulo de "bonos" o "incentivos" sin base legal.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 18.901/2023 - Horas Extraordinarias Municipales',
@@ -1287,7 +1287,7 @@ b) A directivos
 c) A funcionarios con jornada parcial que completen la ordinaria
 
 El maximo de horas extraordinarias es de 80 horas mensuales.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 29.456/2024 - Viaticos y Comisiones de Servicio',
@@ -1312,7 +1312,7 @@ El monto del viatico se fija segun escala legal, considerando:
 - Lugar de comision (nacional o extranjero)
 
 Las comisiones al extranjero requieren autorizacion del alcalde con acuerdo del concejo.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 36.789/2023 - Concesiones Municipales',
@@ -1342,7 +1342,7 @@ a) Bienes nacionales de uso publico en forma exclusiva
 b) Servicios publicos esenciales
 
 La fiscalizacion corresponde a la Direccion de Obras Municipales o unidad competente.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 14.567/2024 - Derechos Municipales',
@@ -1371,7 +1371,7 @@ b) Tramites administrativos ordinarios
 c) Informacion publica (Ley de Transparencia)
 
 Los montos deben estar fijados en ordenanza aprobada por el concejo.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 23.890/2023 - Sumarios Administrativos Municipales',
@@ -1402,7 +1402,7 @@ b) Derecho a defensa
 c) Derecho a conocer los cargos
 d) Derecho a presentar pruebas
 e) Derecho a recurrir`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 48.123/2022 - Calificaciones Funcionarios Municipales',
@@ -1433,7 +1433,7 @@ c) Notificacion al funcionario
 d) Recursos (apelacion ante alcalde)
 
 No procede calificar a funcionarios con menos de 6 meses de desempeno efectivo en el periodo.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Sentencia Corte Suprema Rol 45.678-2023 - Recurso de Proteccion contra DOM',
@@ -1668,7 +1668,7 @@ CONTROL POR EL CONCEJO:
 - Ejecucion presupuestaria
 - Cumplimiento de planes
 - Actuacion del alcalde`,
-      enlace: 'https://www.contraloria.cl/web/cgr/municipal'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'El Principio de Publicidad y Transparencia en la Administracion Municipal',
@@ -2069,7 +2069,7 @@ Plazo de respuesta: 20 dias habiles.
 [Firma]
 [Nombre]
 RUT:`,
-      enlace: 'https://www.consejotransparencia.cl/solicitar-informacion/'
+      enlace: 'https://www.consejotransparencia.cl/solicitud-informacionpublica/'
     },
     {
       titulo: 'Modelo de Ordenanza de Comercio Ambulante',
@@ -2675,7 +2675,7 @@ Las inhabilidades del articulo 4 de la Ley 19.886 se aplican a:
 Esta prohibicion es absoluta y opera por el solo ministerio de la ley.
 
 No se requiere declaracion previa; el contrato adolece de nulidad de pleno derecho.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 28.456/2022 - Remuneraciones de Contrata Municipal',
@@ -2694,7 +2694,7 @@ Sin embargo, la asignacion de grado debe:
 3. Respetar el principio de igualdad de remuneraciones
 
 No procede asignar grados superiores solo por antiguedad sin cambio de funciones.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Dictamen CGR N 19.234/2023 - Declaracion de Patrimonio Municipal',
@@ -2725,7 +2725,7 @@ CONTENIDO:
 
 SANCION POR OMISION:
 Multa de 10 a 30 UTM.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Sentencia Corte Suprema Rol 45.678-2022 - Expropiacion Municipal',
@@ -2793,7 +2793,7 @@ Constituye infraccion grave que puede dar lugar a:
 
 EXCEPCIONES:
 El alcalde puede usar vehiculo institucional permanentemente por razones de seguridad.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
 
     // =====================================
@@ -3179,7 +3179,7 @@ IV. INDICADORES
 
 V. EVALUACION
 Revision semestral con Consejo Comunal de Seguridad.`,
-      enlace: 'https://www.subdere.gov.cl/programas/division-municipalidades/seguridad-publica'
+      enlace: 'https://www.subdere.gov.cl/programas'
     },
     {
       titulo: 'Procedimiento de Reclamos OIRS Municipal',
@@ -3281,7 +3281,7 @@ Para otorgar subvenciones, las municipalidades deben:
 4. FISCALIZACION:
 - Supervision de la municipalidad
 - Control de Contraloria`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     },
     {
       titulo: 'Modelo de Ordenanza sobre Tenencia Responsable de Mascotas',
@@ -3422,7 +3422,7 @@ El teletrabajo en municipalidades requiere:
 
 5. COMPENSACION DE GASTOS:
 Debe regularse en el reglamento interno.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
     }
   ]
 
