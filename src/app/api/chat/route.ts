@@ -42,3 +42,22 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({ historial })
 }
+
+export async function DELETE(request: NextRequest) {
+  const session = await getServerSession(authOptions)
+
+  if (!session || !session.user.id) {
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+  }
+
+  try {
+    await prisma.chatHistory.deleteMany({
+      where: { userId: session.user.id }
+    })
+
+    return NextResponse.json({ success: true, message: 'Historial eliminado' })
+  } catch (error) {
+    console.error('Error deleting chat history:', error)
+    return NextResponse.json({ error: 'Error al eliminar el historial' }, { status: 500 })
+  }
+}

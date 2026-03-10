@@ -18,6 +18,8 @@ export default function ChatPage() {
   const [mensajes, setMensajes] = useState<Mensaje[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [clearing, setClearing] = useState(false)
+  const [showClearModal, setShowClearModal] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function ChatPage() {
                 timestamp: new Date(h.createdAt)
               }
             ])
-            setMensajes(historial.slice(-20)) // Últimos 20 mensajes
+            setMensajes(historial.slice(-20)) // Ultimos 20 mensajes
           }
         })
     }
@@ -108,6 +110,27 @@ export default function ChatPage() {
     }
   }
 
+  const limpiarHistorial = async () => {
+    setClearing(true)
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'DELETE'
+      })
+
+      if (res.ok) {
+        setMensajes([])
+        setShowClearModal(false)
+      } else {
+        alert('Error al limpiar el historial')
+      }
+    } catch (error) {
+      console.error('Error clearing history:', error)
+      alert('Error al limpiar el historial')
+    } finally {
+      setClearing(false)
+    }
+  }
+
   if (status === 'loading') {
     return <div className="flex justify-center items-center min-h-screen">Cargando...</div>
   }
@@ -115,12 +138,60 @@ export default function ChatPage() {
   return (
     <div className="max-w-4xl mx-auto h-[calc(100vh-64px)] flex flex-col">
       {/* Header */}
-      <div className="bg-white border-b px-6 py-4">
-        <h1 className="text-2xl font-bold text-gray-800">Asistente Jurídico IA</h1>
-        <p className="text-gray-600 text-sm">
-          Consulta sobre legislación chilena, jurisprudencia y prácticas legales
-        </p>
+      <div className="bg-white border-b px-6 py-4 flex justify-between items-start">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800">Asistente Juridico IA</h1>
+          <p className="text-gray-600 text-sm">
+            Consulta sobre legislacion chilena, jurisprudencia y practicas legales
+          </p>
+        </div>
+        {mensajes.length > 0 && (
+          <button
+            onClick={() => setShowClearModal(true)}
+            className="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-lg hover:bg-gray-100"
+            title="Limpiar historial"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        )}
       </div>
+
+      {/* Modal de confirmacion */}
+      {showClearModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-sm mx-4 shadow-xl">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Limpiar historial</h3>
+              <p className="text-gray-600 text-sm mb-6">
+                Esta accion eliminara todas tus consultas anteriores. Esta accion no se puede deshacer.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowClearModal(false)}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                  disabled={clearing}
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={limpiarHistorial}
+                  disabled={clearing}
+                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+                >
+                  {clearing ? 'Eliminando...' : 'Eliminar'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Mensajes */}
       <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
@@ -128,17 +199,17 @@ export default function ChatPage() {
           <div className="text-center py-12">
             <div className="text-6xl mb-4">⚖️</div>
             <h2 className="text-xl font-semibold text-gray-700 mb-2">
-              Bienvenido al Asistente Jurídico
+              Bienvenido al Asistente Juridico
             </h2>
             <p className="text-gray-500 max-w-md mx-auto">
-              Puedo ayudarte con consultas sobre legislación chilena,
-              interpretación de leyes, jurisprudencia y prácticas jurídicas.
+              Puedo ayudarte con consultas sobre legislacion chilena,
+              interpretacion de leyes, jurisprudencia y practicas juridicas.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {[
-                '¿Qué dice la Ley 21.389 sobre deudores de pensiones?',
-                '¿Cuáles son los plazos del procedimiento sumario?',
-                'Explicar el recurso de protección'
+                'Que dice la Ley de Municipalidades?',
+                'Cuales son los plazos del procedimiento sumario?',
+                'Explicar el recurso de proteccion'
               ].map((sugerencia, i) => (
                 <button
                   key={i}
@@ -205,7 +276,7 @@ export default function ChatPage() {
           </Button>
         </form>
         <p className="text-xs text-gray-400 mt-2 text-center">
-          Las respuestas son orientativas y no constituyen asesoría legal profesional
+          Las respuestas son orientativas y no constituyen asesoria legal profesional
         </p>
       </div>
     </div>
