@@ -7,7 +7,7 @@ export async function chatLegal(pregunta: string, userId: string) {
   }
 
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
   // Buscar documentos relevantes para contexto
   const documentos = await prisma.documento.findMany({
