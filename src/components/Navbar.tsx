@@ -51,22 +51,24 @@ export function Navbar() {
               </Link>
               {session.user.role === 'ADMIN' && (
                 <div className="relative group">
-                  <button className="hover:text-blue-200 transition-colors flex items-center gap-1">
+                  <button className="hover:text-blue-200 transition-colors flex items-center gap-1 py-2">
                     Admin
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 hidden group-hover:block z-50">
+                  {/* Puente invisible para mantener hover */}
+                  <div className="absolute top-full left-0 h-2 w-48 hidden group-hover:block"></div>
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <Link
                       href="/admin/dashboard"
-                      className="block px-4 py-2 text-gray-800 hover:bg-blue-50 transition-colors"
+                      className="block px-4 py-3 text-gray-800 hover:bg-blue-50 transition-colors"
                     >
                       Panel General
                     </Link>
                     <Link
                       href="/admin"
-                      className="block px-4 py-2 text-gray-800 hover:bg-blue-50 transition-colors"
+                      className="block px-4 py-3 text-gray-800 hover:bg-blue-50 transition-colors"
                     >
                       Gestionar Contenido
                     </Link>
