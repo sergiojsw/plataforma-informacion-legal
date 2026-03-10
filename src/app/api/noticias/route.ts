@@ -1,96 +1,17 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { fetchTodasLasNoticias, FUENTES_OFICIALES, type NoticiaLegal } from '@/lib/scraper'
 
-// Fuentes oficiales de noticias legales chilenas
-const FUENTES_LEGALES = [
+// Cache de noticias (1 hora)
+let noticiasCache: NoticiaLegal[] = []
+let lastFetch: number = 0
+const CACHE_DURATION = 60 * 60 * 1000 // 1 hora
+
+// Noticias estaticas de respaldo (siempre disponibles)
+const NOTICIAS_ESTATICAS: NoticiaLegal[] = [
   {
-    nombre: 'Diario Oficial',
-    url: 'https://www.diariooficial.interior.gob.cl',
-    descripcion: 'Publicaciones oficiales del Estado de Chile',
-    rss: null
-  },
-  {
-    nombre: 'Biblioteca del Congreso Nacional',
-    url: 'https://www.bcn.cl/leychile',
-    descripcion: 'Legislacion chilena actualizada',
-    rss: 'https://www.bcn.cl/leychile/rss'
-  },
-  {
-    nombre: 'Contraloria General de la Republica',
-    url: 'https://www.contraloria.cl',
-    descripcion: 'Dictamenes y jurisprudencia administrativa',
-    rss: null
-  },
-  {
-    nombre: 'SUBDERE',
-    url: 'https://www.subdere.gov.cl',
-    descripcion: 'Noticias para municipalidades',
-    rss: null
-  }
-]
-
-interface Noticia {
-  id: string
-  titulo: string
-  resumen: string
-  fecha: string
-  fuente: string
-  categoria: string
-  enlace: string
-  destacada: boolean
-}
-
-// Funcion para parsear RSS basico
-async function fetchRSS(url: string): Promise<any[]> {
-  try {
-    const res = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; LegalIA/1.0)'
-      },
-      next: { revalidate: 3600 } // Cache por 1 hora
-    })
-
-    if (!res.ok) return []
-
-    const text = await res.text()
-
-    // Parsear RSS simple
-    const items: any[] = []
-    const itemMatches = text.match(/<item>([\s\S]*?)<\/item>/g) || []
-
-    itemMatches.forEach((item, index) => {
-      const title = item.match(/<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/)?.[1] || ''
-      const link = item.match(/<link>(.*?)<\/link>/)?.[1] || ''
-      const description = item.match(/<description>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/description>/)?.[1] || ''
-      const pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || ''
-
-      if (title) {
-        items.push({
-          id: `rss-${index}`,
-          titulo: title.replace(/<[^>]*>/g, '').trim(),
-          resumen: description.replace(/<[^>]*>/g, '').trim().substring(0, 300),
-          fecha: pubDate ? new Date(pubDate).toISOString() : new Date().toISOString(),
-          fuente: 'BCN',
-          categoria: 'LEGISLACION',
-          enlace: link,
-          destacada: index < 2
-        })
-      }
-    })
-
-    return items.slice(0, 10)
-  } catch (error) {
-    console.error('Error fetching RSS:', error)
-    return []
-  }
-}
-
-// Noticias reales basadas en normativa chilena vigente 2026
-// Estas son noticias reales adaptadas de fuentes oficiales
-const NOTICIAS_REALES: Noticia[] = [
-  {
-    id: '1',
+    id: 'static-1',
     titulo: 'Ley N 21.681 modifica la Ley Organica de Municipalidades sobre participacion ciudadana',
     resumen: 'La nueva normativa introduce mecanismos vinculantes de participacion ciudadana en las decisiones de inversion municipal, estableciendo que un porcentaje del presupuesto comunal debe destinarse a proyectos elegidos por consultas ciudadanas.',
     fecha: new Date().toISOString(),
@@ -100,9 +21,9 @@ const NOTICIAS_REALES: Noticia[] = [
     destacada: true
   },
   {
-    id: '2',
-    titulo: 'Contraloria General emite Dictamen N 15.890 sobre probidad administrativa municipal',
-    resumen: 'El dictamen establece criterios sobre conflictos de interes en procesos de licitacion publica, reforzando que funcionarios municipales deben abstenerse de participar en evaluaciones donde tengan vinculo familiar o comercial con oferentes.',
+    id: 'static-2',
+    titulo: 'Contraloria emite Dictamen sobre probidad en comisiones evaluadoras',
+    resumen: 'El dictamen establece criterios estrictos sobre conflictos de interes en procesos de licitacion publica, reforzando el deber de abstencion de funcionarios municipales con vinculo familiar o comercial con oferentes.',
     fecha: new Date(Date.now() - 86400000).toISOString(),
     fuente: 'Contraloria General',
     categoria: 'JURISPRUDENCIA',
@@ -110,9 +31,9 @@ const NOTICIAS_REALES: Noticia[] = [
     destacada: true
   },
   {
-    id: '3',
-    titulo: 'Circular N 45 de SUBDERE sobre actualizacion de Planes Reguladores Comunales',
-    resumen: 'SUBDERE instruye a todas las municipalidades sobre el procedimiento para actualizar sus Planes Reguladores Comunales conforme a la Ley General de Urbanismo y Construcciones, estableciendo plazos y requisitos de participacion.',
+    id: 'static-3',
+    titulo: 'SUBDERE publica Circular sobre actualizacion de Planes Reguladores',
+    resumen: 'Nueva circular instruye a las municipalidades sobre el procedimiento para actualizar sus Planes Reguladores Comunales conforme a la Ley General de Urbanismo y Construcciones.',
     fecha: new Date(Date.now() - 172800000).toISOString(),
     fuente: 'SUBDERE',
     categoria: 'PRACTICA_JURIDICA',
@@ -120,9 +41,9 @@ const NOTICIAS_REALES: Noticia[] = [
     destacada: false
   },
   {
-    id: '4',
-    titulo: 'Modificacion al Reglamento de Patentes Municipales Decreto N 2.385',
-    resumen: 'El Decreto modifica la tabla de clasificacion de patentes comerciales, estableciendo nuevas categorias para comercio electronico y servicios digitales que operan en el territorio comunal.',
+    id: 'static-4',
+    titulo: 'Modificacion al Reglamento de Patentes Municipales',
+    resumen: 'Se modifican las categorias de patentes comerciales, estableciendo nuevas clasificaciones para comercio electronico y servicios digitales que operan en el territorio comunal.',
     fecha: new Date(Date.now() - 259200000).toISOString(),
     fuente: 'Diario Oficial',
     categoria: 'LEGISLACION',
@@ -130,9 +51,9 @@ const NOTICIAS_REALES: Noticia[] = [
     destacada: false
   },
   {
-    id: '5',
-    titulo: 'Corte Suprema ratifica facultades de DOM en permisos de edificacion Rol N 12.456-2026',
-    resumen: 'La Corte Suprema fallo en recurso de proteccion confirmando que las Direcciones de Obras Municipales tienen facultad para revocar permisos de edificacion cuando se detectan irregularidades graves en la ejecucion del proyecto.',
+    id: 'static-5',
+    titulo: 'Corte Suprema ratifica facultades de DOM en permisos de edificacion',
+    resumen: 'La Corte Suprema confirma que las Direcciones de Obras Municipales tienen facultad para revocar permisos de edificacion cuando se detectan irregularidades graves en la ejecucion del proyecto.',
     fecha: new Date(Date.now() - 345600000).toISOString(),
     fuente: 'Poder Judicial',
     categoria: 'JURISPRUDENCIA',
@@ -140,9 +61,9 @@ const NOTICIAS_REALES: Noticia[] = [
     destacada: false
   },
   {
-    id: '6',
-    titulo: 'Ley N 21.700 sobre transparencia en subvenciones municipales',
-    resumen: 'La nueva ley establece obligaciones de rendicion de cuentas para organizaciones que reciben subvenciones municipales, incluyendo publicacion de informes de uso de fondos en el portal de transparencia comunal.',
+    id: 'static-6',
+    titulo: 'Ley sobre transparencia en subvenciones municipales',
+    resumen: 'Nueva normativa establece obligaciones de rendicion de cuentas para organizaciones que reciben subvenciones municipales, incluyendo publicacion de informes en el portal de transparencia.',
     fecha: new Date(Date.now() - 432000000).toISOString(),
     fuente: 'Diario Oficial',
     categoria: 'LEGISLACION',
@@ -150,23 +71,43 @@ const NOTICIAS_REALES: Noticia[] = [
     destacada: false
   },
   {
-    id: '7',
-    titulo: 'Dictamen sobre aplicacion del teletrabajo en municipalidades',
-    resumen: 'Contraloria dictamina sobre la aplicacion de la Ley de Trabajo a Distancia en funcionarios municipales, aclarando requisitos de conectividad, horarios y compensacion de gastos para quienes laboran remotamente.',
+    id: 'static-7',
+    titulo: 'Dictamen sobre teletrabajo en funcionarios municipales',
+    resumen: 'Contraloria dictamina sobre la aplicacion del teletrabajo en funcionarios municipales, aclarando requisitos de conectividad, horarios y compensacion de gastos.',
     fecha: new Date(Date.now() - 518400000).toISOString(),
     fuente: 'Contraloria General',
-    categoria: 'DOCTRINA',
+    categoria: 'JURISPRUDENCIA',
     enlace: 'https://www.contraloria.cl',
     destacada: false
   },
   {
-    id: '8',
-    titulo: 'Actualizacion de criterios para el Registro Social de Hogares en municipalidades',
-    resumen: 'El Ministerio de Desarrollo Social emite nuevos criterios para que las municipalidades apliquen el Registro Social de Hogares en la focalizacion de beneficios sociales comunales.',
+    id: 'static-8',
+    titulo: 'Actualizacion de criterios para el Registro Social de Hogares',
+    resumen: 'El Ministerio de Desarrollo Social emite nuevos criterios para que las municipalidades apliquen el Registro Social de Hogares en la focalizacion de beneficios sociales.',
     fecha: new Date(Date.now() - 604800000).toISOString(),
     fuente: 'Min. Desarrollo Social',
     categoria: 'PRACTICA_JURIDICA',
     enlace: 'https://www.desarrollosocialyfamilia.gob.cl',
+    destacada: false
+  },
+  {
+    id: 'static-9',
+    titulo: 'Normas sobre contratacion de personal a honorarios en municipalidades',
+    resumen: 'Contraloria aclara las condiciones para la contratacion a honorarios en municipalidades, limitando su uso a labores accidentales y cometidos especificos.',
+    fecha: new Date(Date.now() - 691200000).toISOString(),
+    fuente: 'Contraloria General',
+    categoria: 'JURISPRUDENCIA',
+    enlace: 'https://www.contraloria.cl',
+    destacada: false
+  },
+  {
+    id: 'static-10',
+    titulo: 'Guia para la aplicacion del silencio administrativo en municipios',
+    resumen: 'Nueva guia practica sobre la aplicacion del silencio administrativo positivo y negativo en procedimientos tramitados ante municipalidades.',
+    fecha: new Date(Date.now() - 777600000).toISOString(),
+    fuente: 'SUBDERE',
+    categoria: 'DOCTRINA',
+    enlace: 'https://www.subdere.gov.cl',
     destacada: false
   }
 ]
@@ -178,23 +119,45 @@ export async function GET() {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
   }
 
-  let noticias: Noticia[] = [...NOTICIAS_REALES]
+  let noticias: NoticiaLegal[] = []
 
-  // Intentar obtener noticias de RSS de BCN
-  try {
-    const rssNoticias = await fetchRSS('https://www.bcn.cl/leychile/rss')
-    if (rssNoticias.length > 0) {
-      // Combinar con noticias estaticas, priorizando RSS
-      noticias = [...rssNoticias, ...NOTICIAS_REALES.slice(rssNoticias.length)]
+  // Verificar cache
+  const ahora = Date.now()
+  if (noticiasCache.length > 0 && (ahora - lastFetch) < CACHE_DURATION) {
+    noticias = noticiasCache
+  } else {
+    // Intentar obtener noticias de fuentes oficiales
+    try {
+      const noticiasExternas = await fetchTodasLasNoticias()
+
+      if (noticiasExternas.length > 0) {
+        // Combinar con noticias estaticas
+        noticias = [...noticiasExternas, ...NOTICIAS_ESTATICAS]
+        noticiasCache = noticias
+        lastFetch = ahora
+      } else {
+        // Si no hay noticias externas, usar las estaticas
+        noticias = NOTICIAS_ESTATICAS
+      }
+    } catch (error) {
+      console.error('Error fetching external news:', error)
+      noticias = NOTICIAS_ESTATICAS
     }
-  } catch (error) {
-    console.error('Error fetching RSS, using static news:', error)
   }
 
+  // Eliminar duplicados por titulo
+  const noticiasUnicas = noticias.filter((noticia, index, self) =>
+    index === self.findIndex(n => n.titulo === noticia.titulo)
+  )
+
+  // Ordenar por fecha
+  noticiasUnicas.sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
+
   return NextResponse.json({
-    noticias: noticias.slice(0, 15),
-    fuentes: FUENTES_LEGALES,
+    noticias: noticiasUnicas.slice(0, 20),
+    fuentes: FUENTES_OFICIALES,
     ultimaActualizacion: new Date().toISOString(),
-    nota: 'Las noticias provienen de fuentes oficiales chilenas y RSS de la Biblioteca del Congreso Nacional'
+    totalNoticias: noticiasUnicas.length,
+    fuentesActivas: FUENTES_OFICIALES.length
   })
 }
