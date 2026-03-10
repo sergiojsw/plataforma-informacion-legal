@@ -13,18 +13,18 @@ interface Mensaje {
   provider?: string
 }
 
-type AIProvider = 'gemini' | 'groq' | 'openai'
+type AIProvider = 'gemini' | 'groq' | 'cohere'
 
 const PROVIDER_NAMES: Record<AIProvider, string> = {
   gemini: 'Gemini',
   groq: 'Groq',
-  openai: 'OpenAI'
+  cohere: 'Cohere'
 }
 
 const PROVIDER_COLORS: Record<AIProvider, string> = {
   gemini: 'bg-blue-100 text-blue-700',
   groq: 'bg-orange-100 text-orange-700',
-  openai: 'bg-green-100 text-green-700'
+  cohere: 'bg-purple-100 text-purple-700'
 }
 
 export default function ChatPage() {
