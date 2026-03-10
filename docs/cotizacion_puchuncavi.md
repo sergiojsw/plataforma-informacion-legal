@@ -30,13 +30,26 @@ Plataforma Web de Informacion Legal Actualizada con Inteligencia Artificial, des
 |--------|-------------|
 | **Biblioteca Juridica** | Acceso a legislacion, jurisprudencia, doctrina y practicas juridicas actualizadas, con filtros avanzados por categoria, fecha y relevancia |
 | **Buscador Inteligente** | Motor de busqueda con ranking de relevancia, autocompletado, sugerencias y busqueda en texto completo |
-| **Chat con IA** | Asistente juridico con inteligencia artificial especializado en legislacion chilena, con historial de consultas |
+| **Chat con IA** | Asistente juridico con inteligencia artificial especializado en legislacion chilena, con historial de consultas y **analisis de imagenes/documentos** |
 | **Newsletter Diario** | Boletin automatico con novedades legales diarias (lunes a viernes) |
 | **Newsletter Semanal** | Resumen semanal de actualizaciones juridicas relevantes |
 | **Panel de Usuario** | Dashboard personalizado con actividad, consultas recientes y documentos guardados |
 | **Panel Administrativo** | Gestion de usuarios, documentos, newsletters y estadisticas del sistema |
 
-### 1.2 Fuentes de Informacion
+### 1.2 Analisis de Documentos con IA
+
+La plataforma permite **subir imagenes de documentos legales** para su analisis automatico:
+
+| Capacidad | Descripcion |
+|-----------|-------------|
+| **OCR Inteligente** | Extraccion de texto de documentos escaneados |
+| **Analisis de Contratos** | Identificacion de clausulas, partes, obligaciones |
+| **Interpretacion Legal** | Explicacion del contenido juridico en lenguaje simple |
+| **Formatos Soportados** | JPG, PNG, GIF, WebP (hasta 10MB) |
+
+> **Ejemplo de uso:** Subir foto de un contrato y preguntar "¿Cuales son las obligaciones del arrendatario?"
+
+### 1.3 Fuentes de Informacion
 
 La plataforma integra informacion de fuentes oficiales chilenas:
 - Diario Oficial de la Republica de Chile
@@ -45,7 +58,7 @@ La plataforma integra informacion de fuentes oficiales chilenas:
 - SUBDERE
 - Poder Judicial
 
-### 1.3 Contenido Especializado para Municipalidades
+### 1.4 Contenido Especializado para Municipalidades
 
 - Ley Organica Constitucional de Municipalidades (N 18.695)
 - Estatuto Administrativo para funcionarios municipales
@@ -61,7 +74,7 @@ La plataforma integra informacion de fuentes oficiales chilenas:
 
 | Requerimiento | Cumplimiento |
 |---------------|--------------|
-| Plataforma Web con IA sobre jurisprudencia | SI - Chat con IA Gemini especializado |
+| Plataforma Web con IA sobre jurisprudencia | SI - Chat con IA multimodal (texto + imagenes) |
 | Legislacion actualizada | SI - Fuentes oficiales chilenas |
 | Practicas juridicas y doctrinas | SI - Biblioteca categorizada |
 | Buscador inteligente | SI - Con relevancia y autocompletado |
@@ -79,7 +92,7 @@ La plataforma integra informacion de fuentes oficiales chilenas:
 - **Frontend:** Next.js 14 (React)
 - **Backend:** API REST serverless
 - **Base de datos:** PostgreSQL
-- **IA:** Google Gemini 2.5 Flash
+- **IA:** Multi-proveedor con fallback (Gemini, Groq, Cohere) + Vision
 - **Hosting:** Vercel (alta disponibilidad)
 - **SSL:** Certificado HTTPS incluido
 

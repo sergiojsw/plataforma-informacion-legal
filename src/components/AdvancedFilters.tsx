@@ -77,7 +77,7 @@ export function AdvancedFilters({
     (filters.ordenarPor !== 'fecha_desc' ? 1 : 0)
 
   return (
-    <div className="relative">
+    <div className="relative z-30">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
@@ -94,7 +94,13 @@ export function AdvancedFilters({
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-200 p-4 z-50">
+        <>
+          {/* Overlay para cerrar al hacer click fuera */}
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setIsOpen(false)}
+          />
+          <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 p-4 z-50">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-semibold text-gray-800">Filtros</h3>
             <button
@@ -184,6 +190,7 @@ export function AdvancedFilters({
             </Button>
           </div>
         </div>
+        </>
       )}
     </div>
   )
