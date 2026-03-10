@@ -14,12 +14,24 @@ const categorias = [
   { value: 'PRACTICA_JURIDICA', label: 'Práctica Jurídica' }
 ]
 
+interface Usuario {
+  id: string
+  email: string
+  nombre: string
+  rol: string
+  createdAt: string
+  _count: { chatHistory: number }
+}
+
 export default function AdminPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'documentos' | 'newsletter' | 'usuarios'>('documentos')
   const [documentos, setDocumentos] = useState<any[]>([])
+  const [usuarios, setUsuarios] = useState<Usuario[]>([])
   const [loading, setLoading] = useState(false)
+  const [loadingUsers, setLoadingUsers] = useState(false)
+  const [userAction, setUserAction] = useState<{ id: string; action: string } | null>(null)
 
   // Form documento
   const [formDoc, setFormDoc] = useState({
@@ -51,10 +63,69 @@ export default function AdminPage() {
     }
   }, [session])
 
+  useEffect(() => {
+    if (activeTab === 'usuarios' && session?.user?.role === 'ADMIN') {
+      fetchUsuarios()
+    }
+  }, [activeTab, session])
+
   const fetchDocumentos = async () => {
     const res = await fetch('/api/documentos?limit=100')
     const data = await res.json()
     setDocumentos(data.documentos || [])
+  }
+
+  const fetchUsuarios = async () => {
+    setLoadingUsers(true)
+    try {
+      const res = await fetch('/api/usuarios')
+      const data = await res.json()
+      setUsuarios(data.usuarios || [])
+    } catch (error) {
+      console.error('Error fetching users:', error)
+    } finally {
+      setLoadingUsers(false)
+    }
+  }
+
+  const handleChangeRole = async (userId: string, newRol: string) => {
+    setUserAction({ id: userId, action: 'role' })
+    try {
+      const res = await fetch('/api/usuarios', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, rol: newRol })
+      })
+      if (res.ok) {
+        fetchUsuarios()
+      } else {
+        const data = await res.json()
+        alert(data.error || 'Error al cambiar rol')
+      }
+    } catch (error) {
+      alert('Error al cambiar rol')
+    } finally {
+      setUserAction(null)
+    }
+  }
+
+  const handleDeleteUser = async (userId: string, email: string) => {
+    if (!confirm(`¿Eliminar usuario ${email}? Esta accion no se puede deshacer.`)) return
+
+    setUserAction({ id: userId, action: 'delete' })
+    try {
+      const res = await fetch(`/api/usuarios?id=${userId}`, { method: 'DELETE' })
+      if (res.ok) {
+        fetchUsuarios()
+      } else {
+        const data = await res.json()
+        alert(data.error || 'Error al eliminar usuario')
+      }
+    } catch (error) {
+      alert('Error al eliminar usuario')
+    } finally {
+      setUserAction(null)
+    }
   }
 
   const handleSubmitDoc = async (e: React.FormEvent) => {
@@ -291,10 +362,83 @@ export default function AdminPage() {
 
       {/* Tab: Usuarios */}
       {activeTab === 'usuarios' && (
-        <Card title="Gestión de Usuarios">
-          <p className="text-gray-500">
-            La gestión de usuarios se implementará próximamente.
-          </p>
+        <Card title={`Gestion de Usuarios (${usuarios.length})`}>
+          {loadingUsers ? (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Usuario</th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Rol</th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Consultas</th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Registro</th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {usuarios.map(user => (
+                    <tr key={user.id} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-3 px-4">
+                        <div>
+                          <p className="font-medium text-gray-800">{user.nombre}</p>
+                          <p className="text-sm text-gray-500">{user.email}</p>
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <select
+                          value={user.rol}
+                          onChange={(e) => handleChangeRole(user.id, e.target.value)}
+                          disabled={user.id === session?.user?.id || userAction?.id === user.id}
+                          className={`px-3 py-1 rounded-lg text-sm font-medium border ${
+                            user.rol === 'ADMIN'
+                              ? 'bg-purple-100 text-purple-800 border-purple-200'
+                              : 'bg-blue-100 text-blue-800 border-blue-200'
+                          } ${user.id === session?.user?.id ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                          <option value="USUARIO">Usuario</option>
+                          <option value="ADMIN">Administrador</option>
+                        </select>
+                      </td>
+                      <td className="py-3 px-4">
+                        <span className="text-gray-600">{user._count.chatHistory}</span>
+                      </td>
+                      <td className="py-3 px-4 text-sm text-gray-500">
+                        {new Date(user.createdAt).toLocaleDateString('es-CL')}
+                      </td>
+                      <td className="py-3 px-4">
+                        {user.id !== session?.user?.id && (
+                          <button
+                            onClick={() => handleDeleteUser(user.id, user.email)}
+                            disabled={userAction?.id === user.id}
+                            className="text-red-500 hover:text-red-700 disabled:opacity-50"
+                            title="Eliminar usuario"
+                          >
+                            {userAction?.id === user.id && userAction.action === 'delete' ? (
+                              <span className="animate-spin">⏳</span>
+                            ) : (
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            )}
+                          </button>
+                        )}
+                        {user.id === session?.user?.id && (
+                          <span className="text-xs text-gray-400">Tu cuenta</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {usuarios.length === 0 && (
+                <p className="text-center py-8 text-gray-500">No hay usuarios registrados</p>
+              )}
+            </div>
+          )}
         </Card>
       )}
     </div>
