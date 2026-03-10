@@ -23,8 +23,8 @@ export async function fetchBCNNoticias(): Promise<NoticiaLegal[]> {
   const noticias: NoticiaLegal[] = []
 
   try {
-    // RSS de LeyChile
-    const res = await fetch('https://www.bcn.cl/leychile/rss', {
+    // RSS real de ultimas leyes publicadas (via FeedBurner)
+    const res = await fetch('http://feeds.feedburner.com/bcn/ulp?format=xml', {
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; LegalIA/1.0)' },
       next: { revalidate: 3600 }
     })
@@ -36,15 +36,15 @@ export async function fetchBCNNoticias(): Promise<NoticiaLegal[]> {
 
     items.slice(0, 15).forEach((item, index) => {
       const titulo = item.match(/<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/)?.[1]?.replace(/<[^>]*>/g, '').trim() || ''
-      const enlace = item.match(/<link>(.*?)<\/link>/)?.[1] || ''
+      const enlace = item.match(/<link>(.*?)<\/link>/)?.[1]?.replace(/&amp;/g, '&') || ''
       const descripcion = item.match(/<description>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/description>/)?.[1]?.replace(/<[^>]*>/g, '').trim() || ''
       const pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || ''
 
       if (titulo) {
         noticias.push({
           id: `bcn-${Date.now()}-${index}`,
-          titulo,
-          resumen: descripcion.substring(0, 500),
+          titulo: `${titulo} - ${descripcion}`.substring(0, 200),
+          resumen: descripcion,
           fecha: pubDate ? new Date(pubDate).toISOString() : new Date().toISOString(),
           fuente: 'Biblioteca del Congreso Nacional',
           categoria: 'LEGISLACION',
@@ -120,19 +120,14 @@ export async function fetchContraloria(): Promise<NoticiaLegal[]> {
     // La CGR no tiene RSS publico, creamos referencias a secciones importantes
     const secciones = [
       {
-        titulo: 'Ultimos Dictamenes de la Contraloria General',
-        resumen: 'Consulte los dictamenes mas recientes emitidos por la Contraloria General de la Republica sobre materias de administracion publica, municipal y probidad.',
-        enlace: 'https://www.contraloria.cl/web/cgr/dictamenes'
+        titulo: 'Buscador de Jurisprudencia - Contraloria General',
+        resumen: 'Consulte los dictamenes emitidos por la Contraloria General de la Republica sobre materias de administracion publica, municipal y probidad.',
+        enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
       },
       {
-        titulo: 'Jurisprudencia Administrativa Destacada',
-        resumen: 'Buscador de jurisprudencia administrativa. Dictamenes sobre probidad, licitaciones, contratacion publica y funcionarios municipales.',
-        enlace: 'https://www.contraloria.cl/web/cgr/jurisprudencia'
-      },
-      {
-        titulo: 'Normativa para Municipalidades',
-        resumen: 'Compilacion de normas y criterios aplicables a la gestion municipal segun la jurisprudencia de la Contraloria.',
-        enlace: 'https://www.contraloria.cl/web/cgr/municipalidades'
+        titulo: 'Dictamenes y Pronunciamientos Juridicos',
+        resumen: 'Dictamenes sobre probidad, licitaciones, contratacion publica y funcionarios municipales.',
+        enlace: 'https://www.contraloria.cl/web/cgr/dictamenes-y-pronunciamientos-juridicos'
       }
     ]
 
