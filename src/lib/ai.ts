@@ -1,14 +1,15 @@
 import { prisma } from './prisma'
+import Groq from 'groq-sdk'
+
+// Groq es gratuito - obtener API key en https://console.groq.com
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY || ''
+})
 
 export async function chatLegal(pregunta: string, userId: string) {
-  if (!process.env.OPENAI_API_KEY) {
-    throw new Error('OPENAI_API_KEY no configurada. Configure la variable de entorno.')
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error('GROQ_API_KEY no configurada. Obtén tu API key gratuita en https://console.groq.com')
   }
-
-  const { default: OpenAI } = await import('openai')
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-  })
 
   // Buscar documentos relevantes para contexto
   const documentos = await prisma.documento.findMany({
@@ -30,20 +31,22 @@ export async function chatLegal(pregunta: string, userId: string) {
   })
 
   const contexto = documentos.length > 0
-    ? `Documentos relevantes encontrados:\n${documentos.map(d =>
+    ? `Documentos relevantes encontrados en la base de datos:\n${documentos.map(d =>
         `- ${d.titulo} (${d.categoria}): ${d.resumen}\nContenido: ${d.contenido.substring(0, 1000)}...`
       ).join('\n\n')}`
-    : 'No se encontraron documentos específicos en la base de datos.'
+    : 'No se encontraron documentos específicos en la base de datos para esta consulta.'
 
-  const completion = await openai.chat.completions.create({
-    model: 'gpt-4-turbo-preview',
+  const completion = await groq.chat.completions.create({
+    model: 'llama-3.3-70b-versatile',
     messages: [
       {
         role: 'system',
         content: `Eres un asistente jurídico especializado en legislación chilena.
-Tu rol es ayudar a abogados municipales con consultas legales.
-Responde de manera profesional, citando fuentes cuando sea posible.
-Si no tienes información suficiente, indícalo claramente.
+Tu rol es ayudar a abogados de la Dirección Jurídica Municipal con consultas legales.
+Responde de manera profesional, clara y concisa.
+Cita fuentes legales cuando sea posible (leyes, artículos, jurisprudencia).
+Si no tienes información suficiente o la consulta está fuera de tu conocimiento, indícalo claramente.
+Responde siempre en español.
 
 ${contexto}`
       },

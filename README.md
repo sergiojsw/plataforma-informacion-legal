@@ -6,7 +6,7 @@ Plataforma web de información jurídica actualizada con inteligencia artificial
 
 - **Biblioteca Jurídica**: Acceso a legislación, jurisprudencia, doctrina y prácticas jurídicas
 - **Buscador Inteligente**: Búsqueda por palabras clave, categoría y contenido
-- **Chat con IA**: Asistente jurídico impulsado por OpenAI GPT-4
+- **Chat con IA**: Asistente jurídico impulsado por Llama 3.3 70B (Groq - GRATUITO)
 - **Newsletter Automático**: Boletines diarios y semanales
 - **Panel Administrativo**: Gestión de documentos y usuarios
 
@@ -14,25 +14,25 @@ Plataforma web de información jurídica actualizada con inteligencia artificial
 
 - **Frontend**: Next.js 14, React, Tailwind CSS
 - **Backend**: Next.js API Routes
-- **Base de Datos**: PostgreSQL (Neon para producción)
+- **Base de Datos**: PostgreSQL (Neon - gratuito)
 - **Autenticación**: NextAuth.js
-- **IA**: OpenAI GPT-4
+- **IA**: Groq + Llama 3.3 70B (GRATUITO)
 - **Email**: Resend
 
 ## Requisitos Previos
 
 - Node.js 18+
 - Docker y Docker Compose (para desarrollo local)
-- Cuenta en OpenAI (para chat con IA)
-- Cuenta en Resend (para newsletters)
-- Cuenta en Neon (para base de datos en producción)
+- Cuenta en Groq (GRATIS en https://console.groq.com)
+- Cuenta en Resend (para newsletters, opcional)
+- Cuenta en Neon (base de datos gratuita)
 
 ## Instalación Local
 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/plataforma-informacion-legal.git
+git clone https://github.com/sergiojsw/plataforma-informacion-legal.git
 cd plataforma-informacion-legal
 ```
 
@@ -49,22 +49,23 @@ cp .env.example .env
 # Editar .env con tus credenciales
 ```
 
-### 4. Iniciar con Docker
+### 4. Obtener API Key de Groq (GRATIS)
+
+1. Ve a [console.groq.com](https://console.groq.com)
+2. Crea una cuenta (sin tarjeta de crédito)
+3. Genera una API Key
+4. Agrégala a tu `.env` como `GROQ_API_KEY`
+
+### 5. Iniciar con Docker
 
 ```bash
 docker-compose up -d
 ```
 
-### 5. Ejecutar migraciones
+### 6. Ejecutar migraciones
 
 ```bash
-npx prisma migrate dev
-```
-
-### 6. Crear usuario administrador
-
-```bash
-npm run db:seed
+npx prisma db push
 ```
 
 ### 7. Iniciar servidor de desarrollo
@@ -75,60 +76,19 @@ npm run dev
 
 Abre [http://localhost:3000](http://localhost:3000)
 
-## Desarrollo sin Docker
-
-Si prefieres no usar Docker, necesitas PostgreSQL instalado localmente:
-
-```bash
-# Iniciar PostgreSQL local
-# Actualizar DATABASE_URL en .env
-
-npm install
-npx prisma migrate dev
-npm run dev
-```
-
 ## Deploy en Vercel
 
-### 1. Crear base de datos en Neon
+### Variables de entorno requeridas:
 
-1. Ve a [neon.tech](https://neon.tech)
-2. Crea un nuevo proyecto
-3. Copia la connection string
-
-### 2. Conectar con Vercel
-
-1. Importa el repositorio en [vercel.com](https://vercel.com)
-2. Configura las variables de entorno:
-   - `DATABASE_URL`: Connection string de Neon
-   - `NEXTAUTH_URL`: URL de tu app en Vercel
-   - `NEXTAUTH_SECRET`: `openssl rand -base64 32`
-   - `OPENAI_API_KEY`: Tu API key de OpenAI
-   - `RESEND_API_KEY`: Tu API key de Resend
-
-3. Deploy automático
-
-## Estructura del Proyecto
-
-```
-├── prisma/
-│   └── schema.prisma      # Esquema de base de datos
-├── src/
-│   ├── app/
-│   │   ├── (auth)/        # Páginas de login/registro
-│   │   ├── (dashboard)/   # Páginas protegidas
-│   │   ├── api/           # API Routes
-│   │   └── page.tsx       # Homepage
-│   ├── components/        # Componentes React
-│   └── lib/               # Utilidades (prisma, auth, ai)
-├── docker-compose.yml     # Docker para desarrollo
-├── Dockerfile
-└── vercel.json
-```
+| Variable | Descripción | Dónde obtenerla |
+|----------|-------------|-----------------|
+| `DATABASE_URL` | PostgreSQL connection string | [neon.tech](https://neon.tech) (gratis) |
+| `NEXTAUTH_URL` | URL de la app | Tu dominio en Vercel |
+| `NEXTAUTH_SECRET` | Secreto para JWT | `openssl rand -base64 32` |
+| `GROQ_API_KEY` | API key para chat IA | [console.groq.com](https://console.groq.com) (GRATIS) |
+| `RESEND_API_KEY` | API key para emails | [resend.com](https://resend.com) (opcional) |
 
 ## Usuarios de Prueba
-
-Después de ejecutar el seed:
 
 | Email | Contraseña | Rol |
 |-------|------------|-----|
@@ -146,6 +106,21 @@ Después de ejecutar el seed:
 | GET | `/api/chat` | Historial de chat |
 | GET | `/api/newsletter` | Listar newsletters |
 | POST | `/api/newsletter` | Crear newsletter (admin) |
+
+## Estructura del Proyecto
+
+```
+├── prisma/schema.prisma      # Esquema de base de datos
+├── src/
+│   ├── app/
+│   │   ├── (auth)/           # Login/registro
+│   │   ├── (dashboard)/      # Páginas protegidas
+│   │   └── api/              # API Routes
+│   ├── components/           # Componentes React
+│   └── lib/                  # Utilidades
+├── docker-compose.yml
+└── vercel.json
+```
 
 ## Licencia
 
