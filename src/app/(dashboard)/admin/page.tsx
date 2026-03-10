@@ -23,6 +23,9 @@ interface Usuario {
   _count: { chatHistory: number }
 }
 
+// Usuarios demo protegidos
+const DEMO_EMAILS = ['admin@legal.cl', 'usuario@legal.cl']
+
 export default function AdminPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -392,12 +395,12 @@ export default function AdminPage() {
                         <select
                           value={user.rol}
                           onChange={(e) => handleChangeRole(user.id, e.target.value)}
-                          disabled={user.id === session?.user?.id || userAction?.id === user.id}
+                          disabled={user.id === session?.user?.id || userAction?.id === user.id || DEMO_EMAILS.includes(user.email)}
                           className={`px-3 py-1 rounded-lg text-sm font-medium border ${
                             user.rol === 'ADMIN'
                               ? 'bg-purple-100 text-purple-800 border-purple-200'
                               : 'bg-blue-100 text-blue-800 border-blue-200'
-                          } ${user.id === session?.user?.id ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          } ${(user.id === session?.user?.id || DEMO_EMAILS.includes(user.email)) ? 'opacity-50 cursor-not-allowed' : ''}`}
                         >
                           <option value="USUARIO">Usuario</option>
                           <option value="ADMIN">Administrador</option>
@@ -410,7 +413,16 @@ export default function AdminPage() {
                         {new Date(user.createdAt).toLocaleDateString('es-CL')}
                       </td>
                       <td className="py-3 px-4">
-                        {user.id !== session?.user?.id && (
+                        {DEMO_EMAILS.includes(user.email) ? (
+                          <span className="inline-flex items-center gap-1 text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full">
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                            Demo
+                          </span>
+                        ) : user.id === session?.user?.id ? (
+                          <span className="text-xs text-gray-400">Tu cuenta</span>
+                        ) : (
                           <button
                             onClick={() => handleDeleteUser(user.id, user.email)}
                             disabled={userAction?.id === user.id}
@@ -425,9 +437,6 @@ export default function AdminPage() {
                               </svg>
                             )}
                           </button>
-                        )}
-                        {user.id === session?.user?.id && (
-                          <span className="text-xs text-gray-400">Tu cuenta</span>
                         )}
                       </td>
                     </tr>

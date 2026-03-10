@@ -60,6 +60,18 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: 'No puedes cambiar tu propio rol' }, { status: 400 })
     }
 
+    // Verificar si es usuario demo protegido
+    const userToUpdate = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { email: true }
+    })
+
+    if (userToUpdate && DEMO_EMAILS.includes(userToUpdate.email)) {
+      return NextResponse.json({
+        error: 'Este usuario es parte del demo y su rol no puede ser modificado'
+      }, { status: 403 })
+    }
+
     const usuario = await prisma.user.update({
       where: { id: userId },
       data: { rol },
@@ -77,6 +89,9 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: 'Error al actualizar usuario' }, { status: 500 })
   }
 }
+
+// Usuarios protegidos del demo (no se pueden eliminar ni modificar)
+const DEMO_EMAILS = ['admin@legal.cl', 'usuario@legal.cl']
 
 // DELETE - Eliminar usuario (solo admin)
 export async function DELETE(request: NextRequest) {
@@ -97,6 +112,18 @@ export async function DELETE(request: NextRequest) {
     // No permitir auto-eliminacion
     if (userId === session.user.id) {
       return NextResponse.json({ error: 'No puedes eliminarte a ti mismo' }, { status: 400 })
+    }
+
+    // Verificar si es usuario demo protegido
+    const userToDelete = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { email: true }
+    })
+
+    if (userToDelete && DEMO_EMAILS.includes(userToDelete.email)) {
+      return NextResponse.json({
+        error: 'Este usuario es parte del demo y no puede ser eliminado'
+      }, { status: 403 })
     }
 
     // Eliminar historial de chat primero
