@@ -25,8 +25,8 @@ export function Navbar() {
     <nav className="bg-blue-900 text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center gap-2">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <Link href="/" className="flex items-center gap-2" aria-label="Ir al inicio - LegalIA">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
             </svg>
             <span className="font-bold text-xl">LegalIA</span>
@@ -82,14 +82,17 @@ export function Navbar() {
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
                   className="flex items-center gap-2 hover:bg-blue-800 px-3 py-2 rounded-lg transition-colors"
+                  aria-expanded={userMenuOpen}
+                  aria-haspopup="true"
+                  aria-label="Menu de usuario"
                 >
-                  <div className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center text-sm font-medium">
+                  <div className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center text-sm font-medium" aria-hidden="true">
                     {session.user.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
                   <span className="hidden sm:block text-sm">
                     {session.user.name}
                   </span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -164,8 +167,11 @@ export function Navbar() {
               <button
                 className="md:hidden"
                 onClick={() => setMenuOpen(!menuOpen)}
+                aria-expanded={menuOpen}
+                aria-label={menuOpen ? 'Cerrar menu' : 'Abrir menu'}
+                aria-controls="mobile-menu"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
@@ -175,7 +181,7 @@ export function Navbar() {
 
         {/* Mobile menu */}
         {session && menuOpen && (
-          <div className="md:hidden py-4 border-t border-blue-800">
+          <div id="mobile-menu" className="md:hidden py-4 border-t border-blue-800" role="navigation" aria-label="Menu de navegacion movil">
             <div className="flex flex-col gap-4">
               <Link href="/dashboard" className="hover:text-blue-200" onClick={() => setMenuOpen(false)}>
                 Dashboard
