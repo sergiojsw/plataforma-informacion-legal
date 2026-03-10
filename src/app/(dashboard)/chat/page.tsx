@@ -10,6 +10,21 @@ interface Mensaje {
   tipo: 'usuario' | 'asistente'
   contenido: string
   timestamp: Date
+  provider?: string
+}
+
+type AIProvider = 'gemini' | 'groq' | 'openai'
+
+const PROVIDER_NAMES: Record<AIProvider, string> = {
+  gemini: 'Gemini',
+  groq: 'Groq',
+  openai: 'OpenAI'
+}
+
+const PROVIDER_COLORS: Record<AIProvider, string> = {
+  gemini: 'bg-blue-100 text-blue-700',
+  groq: 'bg-orange-100 text-orange-700',
+  openai: 'bg-green-100 text-green-700'
 }
 
 export default function ChatPage() {
@@ -20,6 +35,8 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false)
   const [clearing, setClearing] = useState(false)
   const [showClearModal, setShowClearModal] = useState(false)
+  const [availableProviders, setAvailableProviders] = useState<AIProvider[]>([])
+  const [selectedProvider, setSelectedProvider] = useState<AIProvider | 'auto'>('auto')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -33,27 +50,38 @@ export default function ChatPage() {
   }, [mensajes])
 
   useEffect(() => {
-    // Cargar historial
+    // Cargar historial y proveedores disponibles
     if (session) {
       fetch('/api/chat')
         .then(res => res.json())
         .then(data => {
           if (data.historial) {
-            const historial = data.historial.reverse().flatMap((h: any) => [
-              {
-                id: `${h.id}-q`,
-                tipo: 'usuario' as const,
-                contenido: h.pregunta,
-                timestamp: new Date(h.createdAt)
-              },
-              {
-                id: `${h.id}-r`,
-                tipo: 'asistente' as const,
-                contenido: h.respuesta,
-                timestamp: new Date(h.createdAt)
-              }
-            ])
-            setMensajes(historial.slice(-20)) // Ultimos 20 mensajes
+            const historial = data.historial.reverse().flatMap((h: any) => {
+              // Extraer proveedor del mensaje si existe
+              const providerMatch = h.respuesta.match(/^\[([A-Z]+)\]/)
+              const provider = providerMatch ? providerMatch[1].toLowerCase() : undefined
+              const respuestaSinProvider = h.respuesta.replace(/^\[[A-Z]+\]\s*/, '')
+
+              return [
+                {
+                  id: `${h.id}-q`,
+                  tipo: 'usuario' as const,
+                  contenido: h.pregunta,
+                  timestamp: new Date(h.createdAt)
+                },
+                {
+                  id: `${h.id}-r`,
+                  tipo: 'asistente' as const,
+                  contenido: respuestaSinProvider,
+                  timestamp: new Date(h.createdAt),
+                  provider
+                }
+              ]
+            })
+            setMensajes(historial.slice(-20))
+          }
+          if (data.providers) {
+            setAvailableProviders(data.providers)
           }
         })
     }
@@ -67,7 +95,6 @@ export default function ChatPage() {
     setInput('')
     setLoading(true)
 
-    // Agregar mensaje del usuario
     const userMsg: Mensaje = {
       id: Date.now().toString(),
       tipo: 'usuario',
@@ -80,7 +107,10 @@ export default function ChatPage() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pregunta })
+        body: JSON.stringify({
+          pregunta,
+          provider: selectedProvider === 'auto' ? undefined : selectedProvider
+        })
       })
 
       const data = await res.json()
@@ -89,12 +119,12 @@ export default function ChatPage() {
         throw new Error(data.error)
       }
 
-      // Agregar respuesta del asistente
       const assistantMsg: Mensaje = {
         id: (Date.now() + 1).toString(),
         tipo: 'asistente',
         contenido: data.respuesta,
-        timestamp: new Date()
+        timestamp: new Date(),
+        provider: data.provider
       }
       setMensajes(prev => [...prev, assistantMsg])
     } catch (error: any) {
@@ -113,19 +143,13 @@ export default function ChatPage() {
   const limpiarHistorial = async () => {
     setClearing(true)
     try {
-      const res = await fetch('/api/chat', {
-        method: 'DELETE'
-      })
-
+      const res = await fetch('/api/chat', { method: 'DELETE' })
       if (res.ok) {
         setMensajes([])
         setShowClearModal(false)
-      } else {
-        alert('Error al limpiar el historial')
       }
     } catch (error) {
       console.error('Error clearing history:', error)
-      alert('Error al limpiar el historial')
     } finally {
       setClearing(false)
     }
@@ -138,23 +162,53 @@ export default function ChatPage() {
   return (
     <div className="max-w-4xl mx-auto h-[calc(100vh-64px)] flex flex-col">
       {/* Header */}
-      <div className="bg-white border-b px-6 py-4 flex justify-between items-start">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-800">Asistente Juridico IA</h1>
-          <p className="text-gray-600 text-sm">
-            Consulta sobre legislacion chilena, jurisprudencia y practicas legales
-          </p>
+      <div className="bg-white border-b px-6 py-4">
+        <div className="flex justify-between items-start">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800">Asistente Juridico IA</h1>
+            <p className="text-gray-600 text-sm">
+              Consulta sobre legislacion chilena, jurisprudencia y practicas legales
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            {/* Selector de proveedor */}
+            {availableProviders.length > 1 && (
+              <select
+                value={selectedProvider}
+                onChange={(e) => setSelectedProvider(e.target.value as AIProvider | 'auto')}
+                className="text-sm border border-gray-300 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                title="Seleccionar IA"
+              >
+                <option value="auto">Auto (fallback)</option>
+                {availableProviders.map(p => (
+                  <option key={p} value={p}>{PROVIDER_NAMES[p]}</option>
+                ))}
+              </select>
+            )}
+            {mensajes.length > 0 && (
+              <button
+                onClick={() => setShowClearModal(true)}
+                className="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-lg hover:bg-gray-100"
+                title="Limpiar historial"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            )}
+          </div>
         </div>
-        {mensajes.length > 0 && (
-          <button
-            onClick={() => setShowClearModal(true)}
-            className="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-lg hover:bg-gray-100"
-            title="Limpiar historial"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
-          </button>
+
+        {/* Indicador de proveedores disponibles */}
+        {availableProviders.length > 0 && (
+          <div className="flex gap-2 mt-3">
+            <span className="text-xs text-gray-500">IAs disponibles:</span>
+            {availableProviders.map(p => (
+              <span key={p} className={`text-xs px-2 py-0.5 rounded-full ${PROVIDER_COLORS[p]}`}>
+                {PROVIDER_NAMES[p]}
+              </span>
+            ))}
+          </div>
         )}
       </div>
 
@@ -170,12 +224,12 @@ export default function ChatPage() {
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Limpiar historial</h3>
               <p className="text-gray-600 text-sm mb-6">
-                Esta accion eliminara todas tus consultas anteriores. Esta accion no se puede deshacer.
+                Se eliminaran todas tus consultas. Esta accion no se puede deshacer.
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowClearModal(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
                   disabled={clearing}
                 >
                   Cancelar
@@ -183,7 +237,7 @@ export default function ChatPage() {
                 <button
                   onClick={limpiarHistorial}
                   disabled={clearing}
-                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
                 >
                   {clearing ? 'Eliminando...' : 'Eliminar'}
                 </button>
@@ -235,6 +289,12 @@ export default function ChatPage() {
                   : 'bg-white shadow-md rounded-bl-none'
               }`}
             >
+              {/* Badge del proveedor */}
+              {msg.tipo === 'asistente' && msg.provider && (
+                <span className={`inline-block text-xs px-2 py-0.5 rounded-full mb-2 ${PROVIDER_COLORS[msg.provider as AIProvider] || 'bg-gray-100 text-gray-600'}`}>
+                  {PROVIDER_NAMES[msg.provider as AIProvider] || msg.provider}
+                </span>
+              )}
               <p className={`whitespace-pre-wrap ${msg.tipo === 'asistente' ? 'text-gray-700' : ''}`}>
                 {msg.contenido}
               </p>

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { chatLegal } from '@/lib/ai'
+import { chatLegal, getAvailableProviders } from '@/lib/ai'
 import { prisma } from '@/lib/prisma'
 
 export async function POST(request: NextRequest) {
@@ -12,18 +12,23 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json()
-  const { pregunta } = body
+  const { pregunta, provider } = body
 
   if (!pregunta || pregunta.length < 5) {
     return NextResponse.json({ error: 'La pregunta debe tener al menos 5 caracteres' }, { status: 400 })
   }
 
   try {
-    const respuesta = await chatLegal(pregunta, session.user.id)
-    return NextResponse.json({ respuesta })
-  } catch (error) {
+    const resultado = await chatLegal(pregunta, session.user.id, provider)
+    return NextResponse.json({
+      respuesta: resultado.respuesta,
+      provider: resultado.provider
+    })
+  } catch (error: any) {
     console.error('Error en chat:', error)
-    return NextResponse.json({ error: 'Error al procesar la consulta' }, { status: 500 })
+    return NextResponse.json({
+      error: error.message || 'Error al procesar la consulta'
+    }, { status: 500 })
   }
 }
 
@@ -40,7 +45,10 @@ export async function GET(request: NextRequest) {
     take: 50
   })
 
-  return NextResponse.json({ historial })
+  // Devolver tambien los proveedores disponibles
+  const providers = getAvailableProviders()
+
+  return NextResponse.json({ historial, providers })
 }
 
 export async function DELETE(request: NextRequest) {
