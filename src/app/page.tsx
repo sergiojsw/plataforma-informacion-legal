@@ -76,40 +76,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Demo Section */}
+      {/* CTA Section */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
             Prueba la Plataforma
           </h2>
           <p className="text-gray-600 mb-8">
-            Accede con las cuentas de demostración para explorar todas las funcionalidades
+            Explora todas las funcionalidades con acceso de demostración
           </p>
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <div className="text-3xl mb-3">👤</div>
-              <h3 className="font-semibold text-gray-800 mb-2">Usuario Demo</h3>
-              <p className="text-sm text-gray-500 mb-3">Acceso a biblioteca, buscador y chat</p>
-              <div className="bg-gray-50 rounded-lg p-3 text-sm">
-                <p><strong>Email:</strong> usuario@legal.cl</p>
-                <p><strong>Clave:</strong> usuario123</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-6 border-2 border-blue-500">
-              <div className="text-3xl mb-3">👑</div>
-              <h3 className="font-semibold text-gray-800 mb-2">Administrador</h3>
-              <p className="text-sm text-gray-500 mb-3">Acceso completo + panel de admin</p>
-              <div className="bg-gray-50 rounded-lg p-3 text-sm">
-                <p><strong>Email:</strong> admin@legal.cl</p>
-                <p><strong>Clave:</strong> admin123</p>
-              </div>
-            </div>
-          </div>
           <Link
             href="/login"
-            className="inline-block mt-8 bg-blue-600 text-white hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors"
+            className="inline-block bg-blue-600 text-white hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors"
           >
-            Probar Ahora
+            Acceder a Demo
           </Link>
         </div>
       </section>
@@ -150,7 +130,6 @@ export default function Home() {
               <ul className="space-y-2 text-sm">
                 <li><Link href="/login" className="hover:text-white transition-colors">Iniciar Sesión</Link></li>
                 <li><Link href="/registro" className="hover:text-white transition-colors">Registrarse</Link></li>
-                <li><Link href="/admin" className="hover:text-white transition-colors">Administración</Link></li>
               </ul>
             </div>
             <div>
