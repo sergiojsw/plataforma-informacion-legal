@@ -1,11 +1,15 @@
-import OpenAI from 'openai'
 import { prisma } from './prisma'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-})
-
 export async function chatLegal(pregunta: string, userId: string) {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY no configurada. Configure la variable de entorno.')
+  }
+
+  const { default: OpenAI } = await import('openai')
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+  })
+
   // Buscar documentos relevantes para contexto
   const documentos = await prisma.documento.findMany({
     where: {

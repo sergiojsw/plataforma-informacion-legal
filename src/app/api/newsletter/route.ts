@@ -2,9 +2,30 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
-import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Solo importar Resend cuando se necesite
+async function sendEmail(to: string[], subject: string, html: string) {
+  if (!process.env.RESEND_API_KEY) {
+    console.warn('RESEND_API_KEY no configurada, email no enviado')
+    return false
+  }
+
+  const { Resend } = await import('resend')
+  const resend = new Resend(process.env.RESEND_API_KEY)
+
+  try {
+    await resend.emails.send({
+      from: 'Plataforma Legal <noreply@tudominio.com>',
+      to,
+      subject,
+      html
+    })
+    return true
+  } catch (error) {
+    console.error('Error enviando email:', error)
+    return false
+  }
+}
 
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions)
@@ -51,30 +72,23 @@ export async function POST(request: NextRequest) {
   // Si se solicita enviar inmediatamente
   if (enviar) {
     const usuarios = await prisma.user.findMany({
-      select: { email: true, nombre: true }
+      select: { email: true }
     })
 
-    try {
-      await resend.emails.send({
-        from: 'Plataforma Legal <noreply@tudominio.com>',
-        to: usuarios.map(u => u.email),
-        subject: asunto,
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #1e40af;">${asunto}</h1>
-            <div style="line-height: 1.6;">
-              ${contenido}
-            </div>
-            <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
-            <p style="color: #6b7280; font-size: 12px;">
-              Plataforma de Información Legal - Dirección Jurídica Municipal
-            </p>
-          </div>
-        `
-      })
-    } catch (error) {
-      console.error('Error enviando newsletter:', error)
-    }
+    const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #1e40af;">${asunto}</h1>
+        <div style="line-height: 1.6;">
+          ${contenido}
+        </div>
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
+        <p style="color: #6b7280; font-size: 12px;">
+          Plataforma de Información Legal - Dirección Jurídica Municipal
+        </p>
+      </div>
+    `
+
+    await sendEmail(usuarios.map(u => u.email), asunto, html)
   }
 
   return NextResponse.json(newsletter, { status: 201 })
