@@ -4,9 +4,17 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 // Tipos de proveedores GRATUITOS disponibles
 type AIProvider = 'gemini' | 'groq' | 'cohere'
 
+// Proveedores que soportan visión (imágenes)
+const VISION_PROVIDERS: AIProvider[] = ['gemini', 'groq']
+
 interface AIResponse {
   respuesta: string
   provider: AIProvider
+}
+
+interface ImageData {
+  base64: string
+  mimeType: string
 }
 
 // Configuracion de proveedores gratuitos en orden de prioridad
@@ -28,21 +36,57 @@ Si no tienes informacion suficiente o la consulta esta fuera de tu conocimiento,
 Responde siempre en espanol.`
 
 // Llamar a Gemini (Google - GRATIS)
-async function callGemini(prompt: string): Promise<string> {
+async function callGemini(prompt: string, image?: ImageData): Promise<string> {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error('GEMINI_API_KEY no configurada')
   }
 
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
   const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
+
+  if (image) {
+    // Modo vision con imagen
+    const imagePart = {
+      inlineData: {
+        data: image.base64,
+        mimeType: image.mimeType
+      }
+    }
+    const result = await model.generateContent([
+      `${SYSTEM_PROMPT}\n\n${prompt}`,
+      imagePart
+    ])
+    return result.response.text() || ''
+  }
+
   const result = await model.generateContent(`${SYSTEM_PROMPT}\n\n${prompt}`)
   return result.response.text() || ''
 }
 
 // Llamar a Groq (GRATIS - muy rapido)
-async function callGroq(prompt: string): Promise<string> {
+async function callGroq(prompt: string, image?: ImageData): Promise<string> {
   if (!process.env.GROQ_API_KEY) {
     throw new Error('GROQ_API_KEY no configurada')
+  }
+
+  // Usar modelo con vision si hay imagen
+  const model = image ? 'llama-3.2-90b-vision-preview' : 'llama-3.1-8b-instant'
+
+  // Construir contenido del mensaje
+  let userContent: any = prompt
+  if (image) {
+    userContent = [
+      {
+        type: 'text',
+        text: prompt
+      },
+      {
+        type: 'image_url',
+        image_url: {
+          url: `data:${image.mimeType};base64,${image.base64}`
+        }
+      }
+    ]
   }
 
   const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -52,10 +96,10 @@ async function callGroq(prompt: string): Promise<string> {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: 'llama-3.1-8b-instant',
+      model,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: prompt }
+        { role: 'user', content: userContent }
       ],
       max_tokens: 2048,
       temperature: 0.7
@@ -101,10 +145,19 @@ async function callCohere(prompt: string): Promise<string> {
 }
 
 // Funcion principal con fallback automatico entre IAs gratuitas
-async function callAIWithFallback(prompt: string, preferredProvider?: AIProvider): Promise<AIResponse> {
-  const providers = preferredProvider
+async function callAIWithFallback(prompt: string, preferredProvider?: AIProvider, image?: ImageData): Promise<AIResponse> {
+  // Si hay imagen, solo usar proveedores con vision
+  let providers = preferredProvider
     ? [preferredProvider, ...PROVIDERS.filter(p => p !== preferredProvider)]
     : PROVIDERS
+
+  // Filtrar solo proveedores con vision si hay imagen
+  if (image) {
+    providers = providers.filter(p => VISION_PROVIDERS.includes(p))
+    if (providers.length === 0) {
+      throw new Error('No hay proveedores con soporte de vision disponibles')
+    }
+  }
 
   const errors: string[] = []
 
@@ -115,17 +168,19 @@ async function callAIWithFallback(prompt: string, preferredProvider?: AIProvider
       switch (provider) {
         case 'gemini':
           if (process.env.GEMINI_API_KEY) {
-            respuesta = await callGemini(prompt)
+            respuesta = await callGemini(prompt, image)
           } else continue
           break
 
         case 'groq':
           if (process.env.GROQ_API_KEY) {
-            respuesta = await callGroq(prompt)
+            respuesta = await callGroq(prompt, image)
           } else continue
           break
 
         case 'cohere':
+          // Cohere no soporta vision gratis, saltar si hay imagen
+          if (image) continue
           if (process.env.COHERE_API_KEY) {
             respuesta = await callCohere(prompt)
           } else continue
@@ -145,46 +200,72 @@ async function callAIWithFallback(prompt: string, preferredProvider?: AIProvider
 }
 
 // Funcion principal exportada
-export async function chatLegal(pregunta: string, userId: string, preferredProvider?: AIProvider) {
-  // Buscar documentos relevantes para contexto
-  const documentos = await prisma.documento.findMany({
-    where: {
-      activo: true,
-      OR: [
-        { titulo: { contains: pregunta, mode: 'insensitive' } },
-        { contenido: { contains: pregunta, mode: 'insensitive' } },
-        { resumen: { contains: pregunta, mode: 'insensitive' } }
-      ]
-    },
-    take: 5,
-    select: {
-      titulo: true,
-      categoria: true,
-      resumen: true,
-      contenido: true
-    }
-  })
+export async function chatLegal(
+  pregunta: string,
+  userId: string,
+  preferredProvider?: AIProvider,
+  image?: ImageData
+) {
+  // Si hay imagen, agregar contexto especifico
+  let promptExtra = ''
+  if (image) {
+    promptExtra = '\n\n[El usuario ha adjuntado una imagen/documento. Analiza su contenido para responder la consulta.]'
+  }
 
-  const contexto = documentos.length > 0
-    ? `Documentos relevantes encontrados:\n${documentos.map(d =>
-        `- ${d.titulo} (${d.categoria}): ${d.resumen}\nContenido: ${d.contenido.substring(0, 1000)}...`
-      ).join('\n\n')}`
-    : 'No se encontraron documentos especificos en la base de datos.'
+  // Buscar documentos relevantes para contexto (solo si no hay imagen)
+  let contexto = ''
+  if (!image) {
+    const documentos = await prisma.documento.findMany({
+      where: {
+        activo: true,
+        OR: [
+          { titulo: { contains: pregunta, mode: 'insensitive' } },
+          { contenido: { contains: pregunta, mode: 'insensitive' } },
+          { resumen: { contains: pregunta, mode: 'insensitive' } }
+        ]
+      },
+      take: 5,
+      select: {
+        titulo: true,
+        categoria: true,
+        resumen: true,
+        contenido: true
+      }
+    })
 
-  const prompt = `${contexto}\n\nPregunta: ${pregunta}`
+    contexto = documentos.length > 0
+      ? `Documentos relevantes encontrados:\n${documentos.map(d =>
+          `- ${d.titulo} (${d.categoria}): ${d.resumen}\nContenido: ${d.contenido.substring(0, 1000)}...`
+        ).join('\n\n')}`
+      : 'No se encontraron documentos especificos en la base de datos.'
+  }
 
-  const { respuesta, provider } = await callAIWithFallback(prompt, preferredProvider)
+  const prompt = image
+    ? `${pregunta}${promptExtra}`
+    : `${contexto}\n\nPregunta: ${pregunta}`
 
-  // Guardar en historial
+  const { respuesta, provider } = await callAIWithFallback(prompt, preferredProvider, image)
+
+  // Guardar en historial (indicar si tenia imagen)
+  const preguntaGuardada = image ? `[📷 Imagen adjunta] ${pregunta}` : pregunta
+
   await prisma.chatHistory.create({
     data: {
       userId,
-      pregunta,
+      pregunta: preguntaGuardada,
       respuesta: `[${provider.toUpperCase()}] ${respuesta}`
     }
   })
 
   return { respuesta, provider }
+}
+
+// Obtener proveedores con soporte de vision
+export function getVisionProviders(): AIProvider[] {
+  const available: AIProvider[] = []
+  if (process.env.GEMINI_API_KEY) available.push('gemini')
+  if (process.env.GROQ_API_KEY) available.push('groq')
+  return available
 }
 
 // Obtener proveedores disponibles

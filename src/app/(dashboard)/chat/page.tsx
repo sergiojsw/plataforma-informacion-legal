@@ -11,6 +11,7 @@ interface Mensaje {
   contenido: string
   timestamp: Date
   provider?: string
+  imagePreview?: string
 }
 
 type AIProvider = 'gemini' | 'groq' | 'cohere'
@@ -27,6 +28,13 @@ const PROVIDER_COLORS: Record<AIProvider, string> = {
   cohere: 'bg-purple-100 text-purple-700'
 }
 
+interface ImageUpload {
+  base64: string
+  mimeType: string
+  preview: string
+  name: string
+}
+
 export default function ChatPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -36,8 +44,12 @@ export default function ChatPage() {
   const [clearing, setClearing] = useState(false)
   const [showClearModal, setShowClearModal] = useState(false)
   const [availableProviders, setAvailableProviders] = useState<AIProvider[]>([])
+  const [visionProviders, setVisionProviders] = useState<AIProvider[]>([])
   const [selectedProvider, setSelectedProvider] = useState<AIProvider | 'auto'>('auto')
+  const [selectedImage, setSelectedImage] = useState<ImageUpload | null>(null)
+  const [imageError, setImageError] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -83,34 +95,99 @@ export default function ChatPage() {
           if (data.providers) {
             setAvailableProviders(data.providers)
           }
+          if (data.visionProviders) {
+            setVisionProviders(data.visionProviders)
+          }
         })
     }
   }, [session])
+
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setImageError(null)
+
+    // Validar tipo
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+    if (!allowedTypes.includes(file.type)) {
+      setImageError('Tipo no soportado. Usa JPG, PNG, GIF o WebP')
+      return
+    }
+
+    // Validar tamaño (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      setImageError('La imagen es muy grande. Maximo 10MB')
+      return
+    }
+
+    // Leer como base64
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = reader.result as string
+      const base64 = result.split(',')[1]
+      setSelectedImage({
+        base64,
+        mimeType: file.type,
+        preview: result,
+        name: file.name
+      })
+    }
+    reader.onerror = () => {
+      setImageError('Error al leer la imagen')
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const removeImage = () => {
+    setSelectedImage(null)
+    setImageError(null)
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
 
   const enviarMensaje = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim() || loading) return
 
     const pregunta = input.trim()
+    const currentImage = selectedImage
+
     setInput('')
+    setSelectedImage(null)
     setLoading(true)
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
 
     const userMsg: Mensaje = {
       id: Date.now().toString(),
       tipo: 'usuario',
       contenido: pregunta,
-      timestamp: new Date()
+      timestamp: new Date(),
+      imagePreview: currentImage?.preview
     }
     setMensajes(prev => [...prev, userMsg])
 
     try {
+      const requestBody: any = {
+        pregunta,
+        provider: selectedProvider === 'auto' ? undefined : selectedProvider
+      }
+
+      // Agregar imagen si existe
+      if (currentImage) {
+        requestBody.image = {
+          base64: currentImage.base64,
+          mimeType: currentImage.mimeType
+        }
+      }
+
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          pregunta,
-          provider: selectedProvider === 'auto' ? undefined : selectedProvider
-        })
+        body: JSON.stringify(requestBody)
       })
 
       const data = await res.json()
@@ -295,6 +372,16 @@ export default function ChatPage() {
                   {PROVIDER_NAMES[msg.provider as AIProvider] || msg.provider}
                 </span>
               )}
+              {/* Imagen adjunta del usuario */}
+              {msg.tipo === 'usuario' && msg.imagePreview && (
+                <div className="mb-2">
+                  <img
+                    src={msg.imagePreview}
+                    alt="Imagen adjunta"
+                    className="max-w-full max-h-48 rounded-lg border border-blue-400"
+                  />
+                </div>
+              )}
               <p className={`whitespace-pre-wrap ${msg.tipo === 'asistente' ? 'text-gray-700' : ''}`}>
                 {msg.contenido}
               </p>
@@ -322,12 +409,79 @@ export default function ChatPage() {
 
       {/* Input */}
       <div className="bg-white border-t p-4">
-        <form onSubmit={enviarMensaje} className="flex gap-4">
+        {/* Vista previa de imagen seleccionada */}
+        {selectedImage && (
+          <div className="mb-3 flex items-start gap-2 p-2 bg-gray-50 rounded-lg">
+            <img
+              src={selectedImage.preview}
+              alt="Vista previa"
+              className="w-16 h-16 object-cover rounded-lg border"
+            />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-gray-700 truncate">{selectedImage.name}</p>
+              <p className="text-xs text-gray-500">
+                {visionProviders.length > 0
+                  ? `Sera analizada con ${visionProviders.map(p => PROVIDER_NAMES[p]).join(' o ')}`
+                  : 'No hay IAs con vision disponibles'}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={removeImage}
+              className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+              title="Eliminar imagen"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        {/* Error de imagen */}
+        {imageError && (
+          <div className="mb-3 p-2 bg-red-50 text-red-600 text-sm rounded-lg flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {imageError}
+          </div>
+        )}
+
+        <form onSubmit={enviarMensaje} className="flex gap-2">
+          {/* Input de archivo oculto */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/gif,image/webp"
+            onChange={handleImageSelect}
+            className="hidden"
+          />
+
+          {/* Boton para adjuntar imagen */}
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={loading || visionProviders.length === 0}
+            className={`p-3 rounded-xl border transition-colors ${
+              visionProviders.length === 0
+                ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                : selectedImage
+                  ? 'border-blue-500 text-blue-600 bg-blue-50'
+                  : 'border-gray-300 text-gray-500 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50'
+            }`}
+            title={visionProviders.length === 0 ? 'No hay IAs con vision disponibles' : 'Adjuntar imagen o documento'}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </button>
+
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Escribe tu consulta legal..."
+            placeholder={selectedImage ? "Pregunta sobre la imagen..." : "Escribe tu consulta legal..."}
             className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             disabled={loading}
           />
@@ -336,6 +490,14 @@ export default function ChatPage() {
           </Button>
         </form>
         <p className="text-xs text-gray-400 mt-2 text-center">
+          {visionProviders.length > 0 && (
+            <span className="inline-flex items-center gap-1 mr-2">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Puedes adjuntar imagenes de documentos
+            </span>
+          )}
           Las respuestas son orientativas y no constituyen asesoria legal profesional
         </p>
       </div>
