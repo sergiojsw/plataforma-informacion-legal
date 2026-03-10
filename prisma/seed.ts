@@ -74,7 +74,7 @@ h) El transporte y transito publicos
 i) La prevencion de riesgos y auxilio en emergencias
 j) La seguridad ciudadana
 k) La promocion de la igualdad de oportunidades`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'Ley 19.880 - Ley de Bases de los Procedimientos Administrativos',
@@ -111,7 +111,7 @@ Articulo 65.- Silencio Negativo: Se entiende rechazada cuando afecte patrimonio 
 RECURSOS:
 Articulo 59.- Recurso de Reposicion: 5 dias, ante el mismo organo.
 Articulo 60.- Recurso Jerarquico: 5 dias, ante el superior.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=210676'
+      enlace: null
     },
     {
       titulo: 'Ley 20.285 - Ley de Transparencia y Acceso a la Informacion Publica',
@@ -144,7 +144,7 @@ EXCEPCIONES (Art. 21):
 3) Seguridad de la Nacion
 4) Interes nacional
 5) Documentos declarados secretos por ley`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=276363'
+      enlace: null
     },
     {
       titulo: 'Ley 19.886 - Ley de Compras Publicas',
@@ -176,7 +176,7 @@ d) Servicios de naturaleza confidencial
 
 SISTEMA CHILECOMPRA:
 Sistema electronico de acceso publico y gratuito para publicar convocatorias y realizar procesos de compra.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=213004'
+      enlace: null
     },
     {
       titulo: 'DFL 1-19.653 - Estatuto Administrativo General',
@@ -217,7 +217,7 @@ a) Censura
 b) Multa
 c) Suspension del empleo
 d) Destitucion`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=236392'
+      enlace: null
     },
     {
       titulo: 'Ley 18.883 - Estatuto Administrativo para Funcionarios Municipales',
@@ -258,7 +258,7 @@ d) Destitucion
 e) Supresion del empleo
 f) Termino del periodo legal
 g) Fallecimiento`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=30256'
+      enlace: null
     },
     {
       titulo: 'Ley 21.389 - Registro Nacional de Deudores de Pensiones de Alimentos',
@@ -281,7 +281,7 @@ Si el solicitante esta inscrito, no puede procederse a la emision hasta que acre
 RETENCIONES:
 Los empleadores deben retener de la remuneracion el monto de pension adeudada.
 Tesoreria retendra devoluciones de impuestos.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1165084'
+      enlace: null
     },
     {
       titulo: 'Ley 18.575 - Ley Organica Constitucional de Bases Generales de la Administracion del Estado',
@@ -314,7 +314,7 @@ CONDUCTAS QUE CONTRAVIENEN LA PROBIDAD (Art. 62):
 4) Usar tiempo de trabajo para fines ajenos
 5) Solicitar o aceptar donativos
 6) Intervenir en asuntos con interes personal`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=29967'
+      enlace: null
     },
     {
       titulo: 'DL 3.063 - Ley de Rentas Municipales',
@@ -345,7 +345,7 @@ Valor: porcentaje del precio corriente en plaza del vehiculo.
 
 PRESUPUESTO MUNICIPAL:
 Los municipios prepararan anualmente un presupuesto de ingresos y gastos, aprobado por el concejo municipal.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=6879'
+      enlace: null
     },
     {
       titulo: 'Ley 20.730 - Ley del Lobby',
@@ -369,7 +369,7 @@ Los registros deben publicarse en los sitios electronicos de los organos.
 
 SANCIONES:
 La infraccion se sanciona con multa de 10 a 50 UTM, y en caso de reincidencia, de 50 a 100 UTM.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1060115'
+      enlace: null
     },
     {
       titulo: 'Ley 20.500 - Participacion Ciudadana en la Gestion Publica',
@@ -394,7 +394,7 @@ EN EL AMBITO MUNICIPAL:
 Articulo 94.- Crease un consejo comunal de organizaciones de la sociedad civil en cada comuna.
 
 Articulo 95.- El consejo comunal sera un organo asesor de la municipalidad.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1023143'
+      enlace: null
     },
     {
       titulo: 'Ley 21.180 - Ley de Transformacion Digital del Estado',
@@ -420,7 +420,7 @@ La notificacion se entiende practicada al quinto dia siguiente al ingreso en la 
 
 IMPLEMENTACION MUNICIPAL:
 Las municipalidades tienen un plazo de 5 anos para implementar integralmente la transformacion digital.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1138479'
+      enlace: null
     },
     {
       titulo: 'Ley 19.300 - Ley de Bases Generales del Medio Ambiente',
@@ -445,7 +445,7 @@ PARTICIPACION DE LA COMUNIDAD:
 Cualquier persona puede formular observaciones al Estudio de Impacto Ambiental.
 
 Las observaciones seran ponderadas en los fundamentos de la resolucion de calificacion ambiental.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=30667'
+      enlace: null
     },
     {
       titulo: 'Ley 19.418 - Ley de Juntas de Vecinos y Organizaciones Comunitarias',
@@ -476,7 +476,7 @@ d) Usar bienes de la municipalidad
 
 FONDO DE DESARROLLO VECINAL:
 Las municipalidades deben contemplar en sus presupuestos recursos para financiar proyectos de organizaciones comunitarias.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=70040'
+      enlace: null
     },
     {
       titulo: 'Ley 20.880 - Probidad en la Funcion Publica',
@@ -516,7 +516,7 @@ El funcionario debe abstenerse de participar en decisiones que afecten su intere
 
 SANCIONES:
 Multa de 10 a 30 UTM para autoridades; 1 a 15 UTM para funcionarios.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1088051'
+      enlace: null
     },
     {
       titulo: 'Ley 21.020 - Tenencia Responsable de Mascotas y Animales de Compania',
@@ -549,7 +549,7 @@ b) Graves: multa de 10 a 20 UTM
 c) Gravisimas: multa de 20 a 30 UTM
 
 El procedimiento se tramita ante juzgados de policia local.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1106037'
+      enlace: null
     },
     {
       titulo: 'DFL 458 - Ley General de Urbanismo y Construcciones',
@@ -586,7 +586,7 @@ d) Recibir obras terminadas
 VIVIENDAS ECONOMICAS:
 Superficie edificada no superior a 140 m2.
 Gozan de exencion del 50% de derechos municipales.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=13560'
+      enlace: null
     },
     {
       titulo: 'Ley 19.925 - Ley de Alcoholes',
@@ -627,7 +627,7 @@ SANCIONES:
 - Multa de 5 a 200 UTM
 - Clausura temporal o definitiva
 - Cancelacion de patente`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=221208'
+      enlace: null
     },
     {
       titulo: 'Ley 18.290 - Ley de Transito',
@@ -666,7 +666,7 @@ INFRACCIONES:
 - Graves: multa de 1 a 1,5 UTM
 - Menos graves: multa de 0,5 a 1 UTM
 - Leves: multa de 0,2 a 0,5 UTM`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=29708'
+      enlace: null
     },
     {
       titulo: 'Ley 19.537 - Ley de Copropiedad Inmobiliaria',
@@ -694,7 +694,7 @@ Las municipalidades pueden:
 
 INFRACCIONES:
 Las infracciones a esta ley se sancionan con multa de 1 a 3 UTM, aplicadas por el juzgado de policia local.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=70959'
+      enlace: null
     },
     {
       titulo: 'DFL 725 - Codigo Sanitario',
@@ -728,7 +728,7 @@ SANCIONES:
 - Decomiso de productos
 
 La fiscalizacion corresponde a la autoridad sanitaria, sin perjuicio de las facultades municipales.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=5595'
+      enlace: null
     },
     {
       titulo: 'Ley 16.744 - Seguro Social contra Riesgos de Accidentes del Trabajo',
@@ -766,7 +766,7 @@ OBLIGACIONES DEL EMPLEADOR:
 
 COMITES PARITARIOS:
 En empresas con mas de 25 trabajadores debe existir un Comite Paritario de Higiene y Seguridad.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=28650'
+      enlace: null
     },
     {
       titulo: 'Ley 19.862 - Registro de Personas Juridicas Receptoras de Fondos Publicos',
@@ -797,7 +797,7 @@ FISCALIZACION:
 Las entidades receptoras deben rendir cuenta de los fondos recibidos.
 
 La Contraloria General de la Republica puede fiscalizar el uso de los recursos transferidos.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=207436'
+      enlace: null
     },
     {
       titulo: 'Ley 20.422 - Igualdad de Oportunidades e Inclusion Social de Personas con Discapacidad',
@@ -830,7 +830,7 @@ El Estado debe reservar el 1% de sus funcionarios para personas con discapacidad
 
 FISCALIZACION:
 Las municipalidades deben fiscalizar el cumplimiento de normas de accesibilidad en su territorio.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1010903'
+      enlace: null
     },
     {
       titulo: 'Ley 20.609 - Ley Antidiscriminacion (Ley Zamudio)',
@@ -869,7 +869,7 @@ Si el responsable es funcionario publico, se aplicara ademas una medida discipli
 
 OBLIGACIONES MUNICIPALES:
 Las municipalidades deben garantizar igualdad de trato en todos sus servicios y programas.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1042092'
+      enlace: null
     },
     {
       titulo: 'Ley 21.430 - Sobre Garantias y Proteccion Integral de los Derechos de la Ninez y Adolescencia',
@@ -907,7 +907,7 @@ Unidades municipales encargadas de:
 - Derivacion a servicios especializados
 - Seguimiento de casos
 - Promocion de derechos`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1173643'
+      enlace: null
     },
     {
       titulo: 'Ley 20.066 - Ley de Violencia Intrafamiliar',
@@ -945,7 +945,7 @@ SANCIONES:
 DENUNCIA:
 Cualquier persona puede denunciar hechos de violencia intrafamiliar.
 Los funcionarios publicos que tomen conocimiento tienen obligacion de denunciar.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=242648'
+      enlace: null
     },
     {
       titulo: 'Ley 20.564 - Ley de Transito (Modificaciones sobre Convivencia Vial)',
@@ -982,7 +982,7 @@ Las municipalidades pueden fiscalizar:
 - Estacionamientos
 - Ciclovias
 - Zonas de trafico calmado`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1036381'
+      enlace: null
     },
     {
       titulo: 'Ley 20.920 - Ley de Responsabilidad Extendida del Productor (REP)',
@@ -1021,7 +1021,7 @@ INFRACCIONES:
 - Leves: multa de 1 a 1.000 UTA
 - Graves: multa de 1.001 a 5.000 UTA
 - Gravisimas: multa de 5.001 a 10.000 UTA`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1090894'
+      enlace: null
     },
 
     // =====================================
@@ -1041,7 +1041,7 @@ Los funcionarios municipales que integren comisiones evaluadoras deben absteners
 La participacion de un funcionario impedido constituye infraccion grave al principio de probidad y puede acarrear nulidad del proceso.
 
 Corresponde al alcalde velar por el cumplimiento de estas normas.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 15.127/2023 - Patentes Comerciales y Giros Electronicos',
@@ -1057,7 +1057,7 @@ Las empresas que operan exclusivamente por plataformas electronicas quedan sujet
 No procede que una municipalidad cobre patente a una empresa por el solo hecho de que venda a habitantes de su comuna si no tiene establecimiento en el territorio comunal.
 
 En caso de mantener bodegas o centros de distribucion, corresponde pago de patente a dicho municipio.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 22.450/2024 - Teletrabajo en Funcionarios Municipales',
@@ -1076,7 +1076,7 @@ c) Se formalice mediante resolucion alcaldicia
 Los funcionarios mantienen todos sus derechos y obligaciones.
 
 El derecho a desconexion digital aplica a funcionarios municipales.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 8.234/2023 - Honorarios y Contratacion a Honorarios',
@@ -1098,7 +1098,7 @@ b) Desempenar funciones permanentes
 c) Prolongar indefinidamente vinculaciones
 
 La simulacion de relaciones laborales bajo honorarios constituye irregularidad administrativa.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 45.892/2023 - Bienes Municipales y Comodato',
@@ -1119,7 +1119,7 @@ d) Plazo determinado
 e) Clausula de restitucion
 
 Las sedes de juntas de vecinos gozan de preferencia en asignacion de espacios.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 12.567/2024 - Subvenciones Municipales',
@@ -1144,7 +1144,7 @@ b) Certificacion de gastos
 c) Informe de actividades
 
 El incumplimiento impide acceder a nuevas subvenciones.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 33.456/2024 - Concejales y Conflicto de Interes',
@@ -1164,7 +1164,7 @@ d) Otorguen contratos a personas relacionadas
 El concejal debe hacer presente su inhabilidad antes de la votacion.
 
 La participacion de concejal inhabilitado puede acarrear nulidad del acuerdo.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 28.901/2023 - Ordenanzas Municipales y Legalidad',
@@ -1192,7 +1192,7 @@ d) Afectar derechos constitucionales
 e) Contradecir normas legales
 
 Las multas deben ajustarse a los rangos legales (1 a 5 UTM).`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 19.234/2024 - Permisos Municipales y Silencio Administrativo',
@@ -1218,7 +1218,7 @@ Para invocar silencio positivo:
 a) Transcurrir el plazo legal (20 dias habiles si no hay plazo especial)
 b) Denunciar el incumplimiento
 c) Obtener certificacion del jefe de servicio`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 41.234/2023 - Permisos de Circulacion y Deudores',
@@ -1236,7 +1236,7 @@ b) Emitir permisos de circulacion
 Si el solicitante esta inscrito en el Registro, no puede procederse a la emision hasta acreditar solucion de la deuda.
 
 El funcionario que emita documentos sin verificacion incurre en responsabilidad administrativa.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 55.678/2022 - Asignaciones Funcionarias Municipales',
@@ -1262,7 +1262,7 @@ Asignaciones aplicables:
 - Bono de escolaridad
 
 La jurisprudencia rechaza pagos a titulo de "bonos" o "incentivos" sin base legal.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 18.901/2023 - Horas Extraordinarias Municipales',
@@ -1287,7 +1287,7 @@ b) A directivos
 c) A funcionarios con jornada parcial que completen la ordinaria
 
 El maximo de horas extraordinarias es de 80 horas mensuales.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 29.456/2024 - Viaticos y Comisiones de Servicio',
@@ -1312,7 +1312,7 @@ El monto del viatico se fija segun escala legal, considerando:
 - Lugar de comision (nacional o extranjero)
 
 Las comisiones al extranjero requieren autorizacion del alcalde con acuerdo del concejo.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 36.789/2023 - Concesiones Municipales',
@@ -1342,7 +1342,7 @@ a) Bienes nacionales de uso publico en forma exclusiva
 b) Servicios publicos esenciales
 
 La fiscalizacion corresponde a la Direccion de Obras Municipales o unidad competente.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 14.567/2024 - Derechos Municipales',
@@ -1371,7 +1371,7 @@ b) Tramites administrativos ordinarios
 c) Informacion publica (Ley de Transparencia)
 
 Los montos deben estar fijados en ordenanza aprobada por el concejo.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 23.890/2023 - Sumarios Administrativos Municipales',
@@ -1402,7 +1402,7 @@ b) Derecho a defensa
 c) Derecho a conocer los cargos
 d) Derecho a presentar pruebas
 e) Derecho a recurrir`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 48.123/2022 - Calificaciones Funcionarios Municipales',
@@ -1433,7 +1433,7 @@ c) Notificacion al funcionario
 d) Recursos (apelacion ante alcalde)
 
 No procede calificar a funcionarios con menos de 6 meses de desempeno efectivo en el periodo.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Sentencia Corte Suprema Rol 45.678-2023 - Recurso de Proteccion contra DOM',
@@ -1459,7 +1459,7 @@ RESOLUCION:
 SE CONFIRMA la sentencia que rechazo el recurso de proteccion.
 
 Las DOM tienen facultad para revocar permisos cuando se detectan irregularidades graves.`,
-      enlace: 'https://www.pjud.cl'
+      enlace: null
     },
     {
       titulo: 'Sentencia Corte Suprema Rol 12.345-2024 - Responsabilidad Municipal por Falta de Servicio',
@@ -1483,7 +1483,7 @@ CONSIDERANDOS:
 
 RESOLUCION:
 SE ACOGE la demanda. Municipalidad condenada a pagar indemnizacion de $15.000.000 por dano emergente, lucro cesante y dano moral.`,
-      enlace: 'https://www.pjud.cl'
+      enlace: null
     },
     {
       titulo: 'Sentencia Corte Suprema Rol 67.890-2023 - Nulidad de Derecho Publico',
@@ -1509,7 +1509,7 @@ RESOLUCION:
 SE ACOGE la accion de nulidad. Se declara nulo el decreto alcaldicio.
 
 La municipalidad debera tramitar nuevamente la autorizacion cumpliendo todos los requisitos legales.`,
-      enlace: 'https://www.pjud.cl'
+      enlace: null
     },
 
     // =====================================
@@ -1539,7 +1539,7 @@ SANCIONES POR INFRACCION:
 - Responsabilidad administrativa (sumarios)
 - Responsabilidad civil (indemnizaciones)
 - Responsabilidad penal (delitos funcionarios)`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=29967'
+      enlace: null
     },
     {
       titulo: 'Procedimiento de Reclamo de Ilegalidad Municipal - Art. 151 LOC',
@@ -1572,7 +1572,7 @@ EFECTOS DE SENTENCIA FAVORABLE:
 - Anulacion del acto
 - Orden de actuar conforme a derecho
 - Costas`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'Silencio Administrativo en Procedimientos Municipales',
@@ -1603,7 +1603,7 @@ Silencio negativo:
 
 CERTIFICACION:
 El interesado puede solicitar certificacion de que su solicitud no ha sido resuelta.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=210676'
+      enlace: null
     },
     {
       titulo: 'Responsabilidad Extracontractual del Estado y Municipalidades',
@@ -1634,7 +1634,7 @@ CASOS TIPICOS:
 
 PRESCRIPCION:
 4 anos desde la perpetracion del acto (articulo 2332 Codigo Civil).`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=29973'
+      enlace: null
     },
     {
       titulo: 'Control Juridico de los Actos Municipales',
@@ -1668,7 +1668,7 @@ CONTROL POR EL CONCEJO:
 - Ejecucion presupuestaria
 - Cumplimiento de planes
 - Actuacion del alcalde`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'El Principio de Publicidad y Transparencia en la Administracion Municipal',
@@ -1702,7 +1702,7 @@ EXCEPCIONES:
 - Derechos de terceros
 - Funcionamiento del organo
 - Datos personales`,
-      enlace: 'https://www.consejotransparencia.cl/normativa/'
+      enlace: null
     },
     {
       titulo: 'Las Ordenanzas Municipales: Naturaleza, Alcance y Limites',
@@ -1739,7 +1739,7 @@ Multas de 1 a 5 UTM, aplicadas por juzgados de policia local.
 
 VIGENCIA:
 Entran en vigencia desde su publicacion.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'La Participacion Ciudadana en la Gestion Municipal',
@@ -1775,7 +1775,7 @@ Proceden sobre:
 Requisitos:
 - Acuerdo de 2/3 del concejo, o
 - Solicitud de 5% de ciudadanos inscritos`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1023143'
+      enlace: null
     },
     {
       titulo: 'El Gobierno y Administracion Regional y su Relacion con las Municipalidades',
@@ -1815,7 +1815,7 @@ Las municipalidades pueden asociarse para:
 - Facilitar solucion de problemas comunes
 - Mejor aprovechamiento de recursos
 - Coordinacion con organos del Estado`,
-      enlace: 'https://www.subdere.gov.cl/programas/division-desarrollo-regional'
+      enlace: null
     },
     {
       titulo: 'El Patrimonio Municipal: Bienes y Recursos',
@@ -1855,7 +1855,7 @@ PRESUPUESTO MUNICIPAL:
 - Aprobacion por el concejo
 - Ejecucion por el alcalde
 - Fiscalizacion por Contraloria`,
-      enlace: 'https://www.sinim.gov.cl/'
+      enlace: null
     },
 
     // =====================================
@@ -1891,7 +1891,7 @@ TITULO IV - SANCIONES
 a) Leves: multa de 1 a 3 UTM
 b) Graves: multa de 3 a 10 UTM
 c) Gravisimas: multa de 10 a 30 UTM`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1108997'
+      enlace: null
     },
     {
       titulo: 'Modelo de Decreto Alcaldicio de Delegacion de Funciones',
@@ -1922,7 +1922,7 @@ ANOTESE, COMUNIQUESE Y ARCHIVESE
 
 [FIRMA ALCALDE]
 [FIRMA SECRETARIO MUNICIPAL]`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'Guia de Tramitacion de Sumarios Administrativos Municipales',
@@ -1962,7 +1962,7 @@ c) Sancionar: Censura, Multa, Suspension, Destitucion
 VII. RECURSOS
 - Apelacion ante CGR (10 dias)
 - Reconsideracion ante Alcalde (5 dias)`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=30256'
+      enlace: null
     },
     {
       titulo: 'Procedimiento de Licitacion Publica Municipal - Paso a Paso',
@@ -2001,7 +2001,7 @@ VI. CONTRATO
 - Garantia de fiel cumplimiento
 - Suscripcion
 - Publicacion`,
-      enlace: 'https://www.mercadopublico.cl/Home/Contenidos/Normativa'
+      enlace: null
     },
     {
       titulo: 'Modelo de Reclamo de Ilegalidad Municipal',
@@ -2038,7 +2038,7 @@ PRIMER OTROSI: Acompano documentos.
 SEGUNDO OTROSI: Patrocinio y poder.
 
 [Firma]`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'Modelo de Solicitud de Acceso a Informacion Publica',
@@ -2069,7 +2069,7 @@ Plazo de respuesta: 20 dias habiles.
 [Firma]
 [Nombre]
 RUT:`,
-      enlace: 'https://www.consejotransparencia.cl/solicitud-informacionpublica/'
+      enlace: null
     },
     {
       titulo: 'Modelo de Ordenanza de Comercio Ambulante',
@@ -2113,7 +2113,7 @@ a) Amonestacion escrita
 b) Multa de 1 a 5 UTM
 c) Comiso de productos
 d) Revocacion del permiso`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'Modelo de Convenio de Colaboracion con Organizacion Comunitaria',
@@ -2148,7 +2148,7 @@ Faculta a la Municipalidad para exigir restitucion de fondos.
 
 ________________________     ________________________
 ALCALDE                      PRESIDENTE ORGANIZACION`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=30081'
+      enlace: null
     },
     {
       titulo: 'Modelo de Ordenanza de Ruidos Molestos',
@@ -2190,7 +2190,7 @@ Articulo 6.- Infracciones:
 a) Leves: amonestacion o multa de 1 a 2 UTM
 b) Graves: multa de 2 a 4 UTM
 c) Gravisimas: multa de 4 a 5 UTM + clausura temporal`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'Modelo de Bases de Licitacion para Servicio de Aseo',
@@ -2234,7 +2234,7 @@ d) Cumplimiento de requisitos formales: 10%
 - Cierre: [fecha]
 - Apertura: [fecha]
 - Adjudicacion: [fecha]`,
-      enlace: 'https://www.mercadopublico.cl/Home/Contenidos/Normativa'
+      enlace: null
     },
     {
       titulo: 'Modelo de Recurso de Reposicion Administrativo',
@@ -2271,7 +2271,7 @@ PRIMER OTROSI: Solicito se tenga presente que, en subsidio del presente recurso 
 
 [Firma]
 [Nombre]`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=210676'
+      enlace: null
     },
     {
       titulo: 'Modelo de Acta de Sesion de Concejo Municipal',
@@ -2318,7 +2318,7 @@ No habiendo mas asuntos que tratar, se levanta la sesion a las [hora] horas.
 
 ________________________     ________________________
 ALCALDE                      SECRETARIO MUNICIPAL`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'Modelo de Ordenanza de Participacion Ciudadana',
@@ -2364,7 +2364,7 @@ Articulo 7.- Proceden sobre materias de administracion local.
 Articulo 8.- Convocatoria:
 a) Por acuerdo de 2/3 del concejo, o
 b) Por iniciativa ciudadana del 5% de los electores`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1023143'
+      enlace: null
     },
     {
       titulo: 'Modelo de Contrato de Trabajo a Contrata Municipal',
@@ -2402,7 +2402,7 @@ ALCALDE
 ________________________
 [Nombre Secretario Municipal]
 SECRETARIO MUNICIPAL`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=30256'
+      enlace: null
     },
     {
       titulo: 'Modelo de Denuncia ante Juzgado de Policia Local',
@@ -2448,7 +2448,7 @@ OTROSI: Acompano los siguientes documentos:
 ________________________
 [Nombre y cargo]
 Inspector Municipal`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=28821'
+      enlace: null
     },
 
     // =====================================
@@ -2479,7 +2479,7 @@ PLAZOS DE IMPLEMENTACION:
 EXPEDIENTE ELECTRONICO:
 Conjunto de documentos electronicos que conforman un procedimiento administrativo.
 Debe garantizar integridad, autenticidad y disponibilidad.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1138479'
+      enlace: null
     },
     {
       titulo: 'Ley 21.526 - Sobre Gobierno Regional',
@@ -2505,7 +2505,7 @@ INSTRUMENTOS DE PLANIFICACION:
 - Politicas regionales sectoriales
 
 Las municipalidades deben coordinar sus planes comunales con los instrumentos regionales.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1181706'
+      enlace: null
     },
     {
       titulo: 'Ley 20.730 - Lobby y Gestiones de Interes Particular',
@@ -2534,7 +2534,7 @@ REGISTROS:
 
 SANCIONES:
 Multa de 10 a 50 UTM por omision de registros.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1060115'
+      enlace: null
     },
     {
       titulo: 'Ley 21.131 - Pago a 30 Dias',
@@ -2563,7 +2563,7 @@ Las municipalidades deben publicar trimestralmente:
 
 FISCALIZACION:
 Contraloria General de la Republica.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1128021'
+      enlace: null
     },
     {
       titulo: 'Ley 21.325 - Ley de Migracion y Extranjeria',
@@ -2592,7 +2592,7 @@ ROL DE LAS MUNICIPALIDADES:
 IDENTIFICADOR PROVISORIO:
 Numero de identificacion para extranjeros en tramite.
 Permite acceso a servicios publicos.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1158549'
+      enlace: null
     },
     {
       titulo: 'Ley 21.275 - Inclusion Laboral de Personas con Discapacidad (modificacion)',
@@ -2620,7 +2620,7 @@ OBLIGACIONES ADICIONALES:
 FISCALIZACION:
 Direccion del Trabajo (sector privado)
 Contraloria (sector publico incluyendo municipios)`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1151782'
+      enlace: null
     },
     {
       titulo: 'Ley 21.500 - Chile Sin Humo de Tabaco',
@@ -2650,7 +2650,7 @@ Obligacion de instalar senaletica de prohibicion.
 
 ORDENANZAS MUNICIPALES:
 Las municipalidades pueden establecer zonas adicionales de prohibicion.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1178578'
+      enlace: null
     },
 
     // =====================================
@@ -2675,7 +2675,7 @@ Las inhabilidades del articulo 4 de la Ley 19.886 se aplican a:
 Esta prohibicion es absoluta y opera por el solo ministerio de la ley.
 
 No se requiere declaracion previa; el contrato adolece de nulidad de pleno derecho.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 28.456/2022 - Remuneraciones de Contrata Municipal',
@@ -2694,7 +2694,7 @@ Sin embargo, la asignacion de grado debe:
 3. Respetar el principio de igualdad de remuneraciones
 
 No procede asignar grados superiores solo por antiguedad sin cambio de funciones.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 19.234/2023 - Declaracion de Patrimonio Municipal',
@@ -2725,7 +2725,7 @@ CONTENIDO:
 
 SANCION POR OMISION:
 Multa de 10 a 30 UTM.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Sentencia Corte Suprema Rol 45.678-2022 - Expropiacion Municipal',
@@ -2749,7 +2749,7 @@ No procede incluir:
 - Dano moral (salvo casos excepcionales)
 
 La tasacion debe considerar el uso actual del bien, no su potencial urbanistico futuro.`,
-      enlace: 'https://www.pjud.cl'
+      enlace: null
     },
     {
       titulo: 'Sentencia Corte de Apelaciones - Recurso de Proteccion contra Municipalidad',
@@ -2770,7 +2770,7 @@ El recurso de proteccion procede contra actos municipales cuando:
 Las municipalidades deben respetar el debido proceso incluso en actos de urgencia.
 
 La clausura inmediata solo procede ante riesgo grave e inminente para la salud o seguridad publicas.`,
-      enlace: 'https://www.pjud.cl'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 33.567/2023 - Uso de Vehiculos Municipales',
@@ -2793,7 +2793,7 @@ Constituye infraccion grave que puede dar lugar a:
 
 EXCEPCIONES:
 El alcalde puede usar vehiculo institucional permanentemente por razones de seguridad.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
 
     // =====================================
@@ -2828,7 +2828,7 @@ V. PROPUESTAS
 - Mayor transferencia de competencias
 - Fortalecimiento de ingresos propios
 - Asociativismo municipal`,
-      enlace: 'https://www.subdere.gov.cl/programas/division-desarrollo-regional'
+      enlace: null
     },
     {
       titulo: 'Estudio: El Principio de Probidad en la Gestion Municipal',
@@ -2860,7 +2860,7 @@ V. PREVENCION
 - Capacitacion en etica publica
 - Manuales de procedimiento
 - Canales de denuncia`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=29967'
+      enlace: null
     },
     {
       titulo: 'Manual: Procedimiento Administrativo Sancionador Municipal',
@@ -2894,7 +2894,7 @@ IV. SANCIONES
 
 V. PRESCRIPCION
 Las infracciones prescriben en 2 anos desde su comision.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
 
     // =====================================
@@ -2932,7 +2932,7 @@ QUINTO: CONTROVERSIAS
 Las diferencias seran resueltas de comun acuerdo.
 
 [Firmas de Alcaldes y Secretarios Municipales]`,
-      enlace: 'https://www.subdere.gov.cl/documentacion'
+      enlace: null
     },
     {
       titulo: 'Modelo de Acta de Sesion de Concejo Municipal',
@@ -2971,7 +2971,7 @@ No habiendo mas asuntos que tratar, se levanta la sesion siendo las [hora].
 
 [Firma Alcalde]
 [Firma Secretario Municipal]`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=251693'
+      enlace: null
     },
     {
       titulo: 'Modelo de Resolucion de Subvencion Municipal',
@@ -3003,7 +3003,7 @@ RESUELVO:
 ANOTESE Y COMUNIQUESE
 
 [Firma Alcalde]`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=30081'
+      enlace: null
     },
     {
       titulo: 'Modelo de Ordenanza de Derechos Municipales',
@@ -3037,7 +3037,7 @@ Articulo 8.- Concesiones: [segun bases]
 
 DISPOSICIONES FINALES
 Esta ordenanza rige a partir de su publicacion en el Diario Oficial.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=30106'
+      enlace: null
     },
     {
       titulo: 'Guia de Transparencia Activa Municipal',
@@ -3086,7 +3086,7 @@ Mensual para la mayoria de los items.
 
 IV. FISCALIZACION
 Consejo para la Transparencia.`,
-      enlace: 'https://www.consejotransparencia.cl/transparencia-activa/'
+      enlace: null
     },
     {
       titulo: 'Protocolo de Atencion al Publico en Dependencias Municipales',
@@ -3130,7 +3130,7 @@ Derivar a OIRS para registro y seguimiento.
 
 V. CAPACITACION
 Todo funcionario de atencion directa debe recibir capacitacion anual.`,
-      enlace: 'https://www.subdere.gov.cl/documentacion'
+      enlace: null
     },
     {
       titulo: 'Modelo de Plan Comunal de Seguridad Publica',
@@ -3179,7 +3179,7 @@ IV. INDICADORES
 
 V. EVALUACION
 Revision semestral con Consejo Comunal de Seguridad.`,
-      enlace: 'https://www.subdere.gov.cl/programas'
+      enlace: null
     },
     {
       titulo: 'Procedimiento de Reclamos OIRS Municipal',
@@ -3219,7 +3219,7 @@ VI. CIERRE
 
 VII. REPORTES
 Estadisticas mensuales a Administrador Municipal.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=29967'
+      enlace: null
     },
     {
       titulo: 'Ley 21.040 - Crea el Sistema de Educacion Publica',
@@ -3249,7 +3249,7 @@ Los SLEP coordinan con las municipalidades en:
 
 CALENDARIO DE IMPLEMENTACION:
 Traspaso gradual entre 2018 y 2025.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1118154'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 51.234/2023 - Subvenciones a Organizaciones Comunitarias',
@@ -3281,7 +3281,7 @@ Para otorgar subvenciones, las municipalidades deben:
 4. FISCALIZACION:
 - Supervision de la municipalidad
 - Control de Contraloria`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     },
     {
       titulo: 'Modelo de Ordenanza sobre Tenencia Responsable de Mascotas',
@@ -3314,7 +3314,7 @@ Articulo 8.-
 - Infracciones gravisimas: 10 a 20 UTM
 
 Articulo 10.- El animal puede ser retenido en caso de riesgo para la comunidad.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1108997'
+      enlace: null
     },
     {
       titulo: 'Manual de Gestion del Cementerio Municipal',
@@ -3355,7 +3355,7 @@ VI. EXHUMACIONES
 
 VII. ARCHIVO
 Conservar registros por 100 anos minimo.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=2668'
+      enlace: null
     },
     {
       titulo: 'Ley 21.306 - Mejora Condiciones de Retiro para Funcionarios Municipales',
@@ -3387,7 +3387,7 @@ PROCEDIMIENTO:
 FINANCIAMIENTO:
 Con cargo al presupuesto municipal.
 Transferencias del nivel central para municipalidades de menor capacidad.`,
-      enlace: 'https://www.bcn.cl/leychile/navegar?idNorma=1156551'
+      enlace: null
     },
     {
       titulo: 'Dictamen CGR N 22.789/2024 - Teletrabajo en Municipalidades',
@@ -3422,7 +3422,7 @@ El teletrabajo en municipalidades requiere:
 
 5. COMPENSACION DE GASTOS:
 Debe regularse en el reglamento interno.`,
-      enlace: 'https://www.contraloria.cl/web/cgr/buscar-jurisprudencia'
+      enlace: null
     }
   ]
 
